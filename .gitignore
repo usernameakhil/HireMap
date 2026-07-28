@@ -7,3 +7,4 @@ server/.env
 .env
 *.env
 node_modules/
+server/uploads/
