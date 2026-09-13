@@ -4,7 +4,7 @@ const GoogleButton = ({ text = "Continue with Google", onClick }) => {
     <button 
       type="button"
       onClick={onClick}
-      className="w-full flex items-center justify-center gap-3 bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 font-medium py-2.5 rounded-lg transition-all duration-200 shadow-sm"
+      className="w-full flex items-center justify-center gap-3 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 hover:bg-slate-50 dark:hover:bg-white/10 text-slate-700 dark:text-slate-200 font-medium py-3 rounded-xl transition-all duration-200 shadow-sm text-sm"
     >
       {/* Google "G" Logo SVG */}
       <svg className="w-5 h-5" viewBox="0 0 24 24">

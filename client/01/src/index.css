@@ -1,37 +1,91 @@
 @import "tailwindcss";
 
-/* 1. Force background on every high-level tag */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* 1. Dynamic Root & Body Styling for Light & Dark Modes */
 html, 
 body, 
 #root {
   margin: 0 !important;
   padding: 0 !important;
-  background-color: #0f172a !important; /* The Orbit Deep Slate */
-  color: #94a3b8;
   min-height: 100vh !important;
   width: 100% !important;
-  display: block !important; /* Prevents centering gaps */
+  display: block !important;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
-/* 2. Style the scrollbar to match so white doesn't show during scroll */
+/* Light mode defaults */
+html:not(.dark),
+html:not(.dark) body,
+html:not(.dark) #root {
+  background-color: #f8fafc !important;
+  color: #334155;
+}
+
+/* Dark mode (Executive slate palette: NOT pitch black, smooth million-dollar SaaS) */
+html.dark,
+html.dark body,
+html.dark #root {
+  background-color: #0b0f19 !important;
+  color: #94a3b8;
+}
+
+/* 2. Style the scrollbars for both Light and Dark modes */
 ::-webkit-scrollbar {
-  width: 10px;
-}
-::-webkit-scrollbar-track {
-  background: #0f172a;
-}
-::-webkit-scrollbar-thumb {
-  background: #1e293b;
-  border: 2px solid #0f172a;
-  border-radius: 10px;
+  width: 8px;
+  height: 8px;
 }
 
-/* 3. Keep standard Orbit typography */
+html:not(.dark) ::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+html:not(.dark) ::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+html:not(.dark) ::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+html.dark ::-webkit-scrollbar-track {
+  background: #0b0f19;
+}
+html.dark ::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 9999px;
+  border: 2px solid #0b0f19;
+}
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+
+/* 3. Color scheme standard */
 :root {
-  font-family: 'Inter', system-ui, sans-serif;
+  color-scheme: light;
+}
+
+.dark {
   color-scheme: dark;
 }
+
 .container {
   max-width: none !important;
   padding: 0 !important;
+}
+
+/* Custom Scrollbar Utility */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+html:not(.dark) .custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #e2e8f0;
+  border-radius: 9999px;
+}
+html.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 9999px;
 }

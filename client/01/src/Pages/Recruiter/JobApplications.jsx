@@ -73,67 +73,67 @@ const JobApplications = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0f1a] text-slate-300">
+    <div className="min-h-screen bg-slate-50 dark:bg-[#0a0f1a] text-slate-800 dark:text-slate-300 transition-colors duration-200">
       <Navbar />
       
       <div className="max-w-7xl mx-auto px-6 py-12">
-        <header className="mb-12">
-          <h1 className="text-4xl font-black text-white uppercase tracking-tighter">
-            Enlisted <span className="text-indigo-500">Operators</span>
+        <header className="mb-10">
+          <h1 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white uppercase tracking-tighter">
+            Enlisted <span className="text-indigo-600 dark:text-indigo-400">Operators</span>
           </h1>
-          <p className="text-slate-500 font-bold uppercase text-xs tracking-widest mt-2">
+          <p className="text-slate-500 font-bold uppercase text-xs tracking-wider mt-2">
             Execute command protocols: Shortlist, Reject, or Message Candidates.
           </p>
         </header>
 
         {loading ? (
           <div className="flex flex-col items-center justify-center py-20">
-            <Loader className="animate-spin text-indigo-500 mb-4" size={40} />
-            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-600">Syncing Database...</p>
+            <Loader className="animate-spin text-indigo-600 dark:text-indigo-500 mb-4" size={40} />
+            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 dark:text-slate-600">Syncing Database...</p>
           </div>
         ) : applications.length === 0 ? (
-          <div className="bg-white/5 border border-white/10 border-dashed p-20 text-center rounded-[2rem]">
-            <p className="text-slate-500 font-black uppercase tracking-widest text-sm">No dossiers received in this sector.</p>
+          <div className="bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 border-dashed p-16 sm:p-20 text-center rounded-[2.5rem] shadow-sm">
+            <p className="text-slate-500 font-bold uppercase tracking-wider text-sm">No dossiers received in this sector.</p>
           </div>
         ) : (
-          <div className="bg-white/5 border border-white/10 rounded-[2.5rem] backdrop-blur-xl overflow-hidden">
+          <div className="bg-white dark:bg-white/5 border border-slate-200/90 dark:border-white/10 rounded-[2.5rem] backdrop-blur-xl overflow-hidden shadow-sm dark:shadow-xl">
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="border-b border-white/10 bg-white/5">
-                    <th className="p-6 text-[10px] font-black text-slate-500 uppercase tracking-widest">Candidate</th>
-                    <th className="p-6 text-[10px] font-black text-slate-500 uppercase tracking-widest">Target Deployment</th>
-                    <th className="p-6 text-[10px] font-black text-slate-500 uppercase tracking-widest text-center">AI Match</th>
-                    <th className="p-6 text-[10px] font-black text-slate-500 uppercase tracking-widest text-center">Communication</th>
-                    <th className="p-6 text-[10px] font-black text-slate-500 uppercase tracking-widest">Command Logic</th>
+                  <tr className="border-b border-slate-200/80 dark:border-white/10 bg-slate-50 dark:bg-white/5">
+                    <th className="p-6 text-[10px] font-black text-slate-500 uppercase tracking-wider">Candidate</th>
+                    <th className="p-6 text-[10px] font-black text-slate-500 uppercase tracking-wider">Target Deployment</th>
+                    <th className="p-6 text-[10px] font-black text-slate-500 uppercase tracking-wider text-center">AI Match</th>
+                    <th className="p-6 text-[10px] font-black text-slate-500 uppercase tracking-wider text-center">Communication</th>
+                    <th className="p-6 text-[10px] font-black text-slate-500 uppercase tracking-wider">Command Logic</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-white/5">
+                <tbody className="divide-y divide-slate-100 dark:divide-white/5">
                   {applications.map((app) => (
-                    <tr key={app._id} className="hover:bg-white/[0.02] transition-colors group">
+                    <tr key={app._id} className="hover:bg-slate-50/70 dark:hover:bg-white/[0.02] transition-colors group">
                       {/* Candidate */}
                       <td className="p-6">
                         <div className="flex items-center gap-4">
-                          <div className="w-10 h-10 bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 rounded-xl flex items-center justify-center font-black">
+                          <div className="w-10 h-10 bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-100 dark:border-indigo-500/20 text-indigo-600 dark:text-indigo-400 rounded-xl flex items-center justify-center font-black">
                             {app.applicant?.name?.charAt(0) || <User size={16} />}
                           </div>
                           <div>
-                            <p className="text-sm font-black text-white uppercase">{app.applicant?.name || "Unknown"}</p>
-                            <p className="text-[10px] text-slate-500 font-bold">{app.applicant?.email}</p>
+                            <p className="text-sm font-black text-slate-900 dark:text-white uppercase">{app.applicant?.name || "Unknown"}</p>
+                            <p className="text-[10px] text-slate-400 dark:text-slate-500 font-bold">{app.applicant?.email}</p>
                           </div>
                         </div>
                       </td>
 
                       {/* Job Role & Resume */}
                       <td className="p-6">
-                        <p className="text-xs font-black text-slate-300 uppercase tracking-tight mb-1">
-                          {app.jobId?.title || "Deleted Node"}
+                        <p className="text-xs font-black text-slate-800 dark:text-slate-300 uppercase tracking-tight mb-1">
+                          {app.jobId?.title || "Deleted Role"}
                         </p>
                         <a 
                           href={app.resumeUrl}
                           target="_blank" 
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 text-indigo-400 hover:text-white transition-colors text-[9px] font-black uppercase"
+                          className="inline-flex items-center gap-1 text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-white transition-colors text-[9px] font-black uppercase"
                         >
                           <FileText size={12} /> View Dossier
                         </a>
@@ -141,9 +141,9 @@ const JobApplications = () => {
 
                       {/* AI Score */}
                       <td className="p-6 text-center">
-                        <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-full">
-                          <TrendingUp size={12} className="text-emerald-400" />
-                          <span className="text-xs font-black text-white">{app.matchScore || 0}%</span>
+                        <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-full">
+                          <TrendingUp size={12} className="text-emerald-500" />
+                          <span className="text-xs font-black text-slate-900 dark:text-white">{app.matchScore || 0}%</span>
                         </div>
                       </td>
 
@@ -151,10 +151,10 @@ const JobApplications = () => {
                       <td className="p-6 text-center">
                         <button 
                           onClick={() => handleContactOperator(app.applicant?.email, app.jobId?.title, app.applicant?.name)}
-                          className="p-2.5 bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 rounded-xl hover:bg-indigo-500 hover:text-white transition-all flex items-center justify-center mx-auto"
-                          title="Contact Operator"
+                          className="p-2.5 bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-100 dark:border-indigo-500/20 rounded-xl hover:bg-indigo-600 hover:text-white transition-all flex items-center justify-center mx-auto shadow-sm"
+                          title="Contact Candidate"
                         >
-                          <Send size={16} />
+                          <Send size={15} />
                         </button>
                       </td>
 
@@ -164,29 +164,29 @@ const JobApplications = () => {
                           <div className="flex gap-2">
                             <button 
                               onClick={() => handleStatusChange(app._id, 'Shortlisted')}
-                              className="px-3 py-2 bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 rounded-xl hover:bg-emerald-500 hover:text-white transition-all flex items-center gap-2 text-[9px] font-black uppercase"
+                              className="px-3 py-1.5 bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-500 border border-emerald-200 dark:border-emerald-500/20 rounded-xl hover:bg-emerald-600 hover:text-white transition-all flex items-center gap-1.5 text-[9px] font-black uppercase shadow-sm"
                             >
-                              <CheckCircle size={14} /> Shortlist
+                              <CheckCircle size={13} /> Shortlist
                             </button>
                             <button 
                               onClick={() => handleStatusChange(app._id, 'Rejected')}
-                              className="px-3 py-2 bg-rose-500/10 text-rose-500 border border-rose-500/20 rounded-xl hover:bg-rose-500 hover:text-white transition-all flex items-center gap-2 text-[9px] font-black uppercase"
+                              className="px-3 py-1.5 bg-rose-50 dark:bg-rose-500/10 text-rose-600 dark:text-rose-500 border border-rose-200 dark:border-rose-500/20 rounded-xl hover:bg-rose-600 hover:text-white transition-all flex items-center gap-1.5 text-[9px] font-black uppercase shadow-sm"
                             >
-                              <XCircle size={14} /> Reject
+                              <XCircle size={13} /> Reject
                             </button>
                           </div>
                         ) : (
                           <div className="flex items-center gap-3">
-                            <span className={`text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-lg border ${
+                            <span className={`text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded-lg border ${
                               app.status === 'Shortlisted' 
-                              ? 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20' 
-                              : 'bg-rose-500/10 text-rose-500 border-rose-500/20'
+                              ? 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-200 dark:border-emerald-500/20' 
+                              : 'bg-rose-50 dark:bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-200 dark:border-rose-500/20'
                             }`}>
                               {app.status}
                             </span>
                             <button 
                               onClick={() => handleStatusChange(app._id, 'Pending')}
-                              className="text-[9px] font-bold text-slate-600 hover:text-white uppercase underline"
+                              className="text-[9px] font-bold text-slate-500 hover:text-slate-900 dark:hover:text-white uppercase underline"
                             >
                               Reset
                             </button>

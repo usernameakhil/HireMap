@@ -142,71 +142,71 @@ const CoinStore = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#09141e] text-slate-200 font-sans relative overflow-x-hidden">
+    <div className="min-h-screen bg-slate-50 dark:bg-[#09141e] text-slate-800 dark:text-slate-200 font-sans relative overflow-x-hidden transition-colors duration-200">
       <div className="fixed inset-0 pointer-events-none opacity-20">
         <div className="absolute top-[-5%] left-[-5%] w-[40%] h-[40%] bg-indigo-600/10 rounded-full blur-[100px]" />
         <div className="absolute bottom-[5%] right-[-5%] w-[30%] h-[30%] bg-indigo-500/10 rounded-full blur-[100px]" />
       </div>
 
       {loading && (
-        <div className="fixed inset-0 z-[2000] bg-black/80 backdrop-blur-md flex flex-col items-center justify-center space-y-6 text-center px-4">
-          <Loader2 className="text-indigo-500 animate-spin" size={60} />
+        <div className="fixed inset-0 z-[2000] bg-slate-900/60 dark:bg-black/80 backdrop-blur-md flex flex-col items-center justify-center space-y-6 text-center px-4">
+          <Loader2 className="text-indigo-600 dark:text-indigo-500 animate-spin" size={60} />
           <div>
             <p className="text-white font-black uppercase tracking-[0.3em] text-sm">Secure Payment Gateway</p>
-            <p className="text-slate-500 text-[10px] uppercase mt-2">Connecting to Razorpay Servers...</p>
+            <p className="text-slate-400 text-[10px] uppercase mt-2">Connecting to Razorpay Servers...</p>
           </div>
         </div>
       )}
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-12 md:py-20">
-        <Link to="/StudentDashboard" className="absolute top-8 right-8 p-4 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition-all z-[100] active:scale-90 shadow-2xl backdrop-blur-xl group">
-          <X size={24} className="group-hover:rotate-90 transition-transform" />
+        <Link to="/StudentDashboard" aria-label="Close Coin Store" className="absolute top-8 right-8 p-3.5 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl hover:bg-slate-100 dark:hover:bg-white/10 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all z-[100] active:scale-95 shadow-md backdrop-blur-xl group">
+          <X size={22} className="group-hover:rotate-90 transition-transform" />
         </Link>
 
-        <header className="mb-20 space-y-2">
-          <motion.h1 initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="text-4xl md:text-6xl font-black text-white tracking-tighter uppercase leading-none">
-            Coin <span className="text-indigo-500">Store</span>
+        <header className="mb-14 space-y-2">
+          <motion.h1 initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="text-4xl md:text-6xl font-black text-slate-900 dark:text-white tracking-tighter uppercase leading-none">
+            Coin <span className="text-indigo-600 dark:text-indigo-400">Store</span>
           </motion.h1>
-          <p className="text-slate-500 font-medium italic opacity-60">Recharge AI Analysis Credits</p>
+          <p className="text-slate-500 font-medium italic">Recharge AI Analysis Credits</p>
         </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
           {bundles.map((bundle, index) => (
             <motion.div 
               key={bundle.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              whileHover={{ y: -10 }}
-              className={`relative bg-[#030712]/60 border ${bundle.popular ? 'border-indigo-500/40' : 'border-white/5'} p-12 rounded-[3.5rem] flex flex-col items-center backdrop-blur-3xl shadow-2xl transition-all duration-500 group`}
+              whileHover={{ y: -8 }}
+              className={`relative bg-white dark:bg-[#030712]/60 border ${bundle.popular ? 'border-indigo-500/50 shadow-indigo-500/10' : 'border-slate-200/90 dark:border-white/5'} p-10 rounded-[3rem] flex flex-col items-center backdrop-blur-3xl shadow-sm hover:shadow-md dark:shadow-2xl transition-all duration-300 group`}
             >
               {bundle.popular && (
-                <div className="absolute -top-5 bg-indigo-600 text-white px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest shadow-xl flex items-center gap-2">
+                <div className="absolute -top-4 bg-indigo-600 text-white px-5 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-md flex items-center gap-1.5">
                   <Star size={12} fill="currentColor" /> Best Value
                 </div>
               )}
-              <div className="mb-8 p-6 bg-[#09141e] rounded-3xl border border-white/5 shadow-inner group-hover:scale-110 transition-transform">
+              <div className="mb-6 p-5 bg-indigo-50 dark:bg-[#09141e] rounded-3xl border border-indigo-100 dark:border-white/5 shadow-sm group-hover:scale-105 transition-transform">
                 {bundle.icon}
               </div>
-              <h3 className="text-3xl font-black text-white mb-2 uppercase tracking-tighter">{bundle.coins} Coins</h3>
-              <p className="text-slate-500 text-[10px] font-black uppercase tracking-[0.2em] mb-10">{bundle.label}</p>
-              <div className="text-5xl font-black text-white mb-12 tracking-tighter leading-none">
-                <span className="text-xl text-indigo-500 align-top mr-1">₹</span>{bundle.price}
+              <h3 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white mb-1 uppercase tracking-tighter">{bundle.coins} Coins</h3>
+              <p className="text-slate-400 dark:text-slate-500 text-[10px] font-black uppercase tracking-wider mb-8">{bundle.label}</p>
+              <div className="text-4xl sm:text-5xl font-black text-slate-900 dark:text-white mb-10 tracking-tighter leading-none">
+                <span className="text-lg text-indigo-600 dark:text-indigo-400 align-top mr-1">₹</span>{bundle.price}
               </div>
               <button 
                 onClick={() => handleRazorpayPayment(bundle)}
                 disabled={loading}
-                className={`w-full py-5 ${bundle.popular ? 'bg-indigo-600 text-white' : 'bg-white text-black'} hover:bg-indigo-500 hover:text-white rounded-2xl font-black uppercase text-[10px] tracking-widest transition-all flex items-center justify-center gap-3 shadow-2xl active:scale-95 disabled:opacity-50`}
+                className={`w-full py-4 ${bundle.popular ? 'bg-indigo-600 text-white hover:bg-indigo-500' : 'bg-slate-900 text-white hover:bg-indigo-600 dark:bg-white dark:text-black dark:hover:bg-indigo-500 dark:hover:text-white'} rounded-2xl font-black uppercase text-[10px] tracking-wider transition-all flex items-center justify-center gap-2 shadow-sm active:scale-95 disabled:opacity-50`}
               >
-                {loading ? "Waiting..." : "Purchase"} <ShoppingCart size={16} />
+                {loading ? "Waiting..." : "Purchase"} <ShoppingCart size={15} />
               </button>
             </motion.div>
           ))}
         </div>
 
-        <footer className="flex flex-col items-center opacity-30 space-y-4">
-           <div className="flex items-center gap-2 text-slate-500 text-[9px] font-black uppercase tracking-[0.4em]">
-              <Shield size={14} /> PCI-DSS Compliant Gateway • SSL Secured
+        <footer className="flex flex-col items-center opacity-60 space-y-3">
+           <div className="flex items-center gap-2 text-slate-500 text-[9px] font-bold uppercase tracking-widest">
+              <Shield size={14} className="text-emerald-500" /> PCI-DSS Compliant Gateway • SSL Secured
            </div>
         </footer>
       </div>

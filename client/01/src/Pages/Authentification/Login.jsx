@@ -58,17 +58,13 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col lg:flex-row bg-[#F1F5F9] font-sans overflow-hidden">
+    <div className="min-h-screen flex flex-col lg:flex-row bg-slate-50 dark:bg-[#0b0f19] font-sans overflow-hidden transition-colors duration-200">
       
       {/* --- LEFT SIDE: CRAZY VISUAL EXPERIENCE --- */}
-      <div className="hidden lg:flex lg:w-1/2 relative bg-[#0F172A] items-center justify-center p-20 overflow-hidden">
+      <div className="hidden lg:flex lg:w-1/2 relative bg-slate-900 dark:bg-[#09141e] items-center justify-center p-20 overflow-hidden">
         <div className="absolute inset-0 z-0">
             <div className="absolute top-[-20%] left-[-20%] w-[80%] h-[80%] bg-indigo-600/20 rounded-full blur-[120px] animate-pulse" />
             <div className="absolute bottom-[-20%] right-[-20%] w-[60%] h-[60%] bg-blue-600/20 rounded-full blur-[120px] animate-pulse" />
-            <div className="absolute inset-0 opacity-10" style={{ 
-                backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
-                backgroundSize: '40px 40px'
-            }} />
         </div>
 
         <motion.div 
@@ -78,27 +74,27 @@ const Login = () => {
         >
             <div className="flex items-center gap-4">
                 <img src={HIREMAP_LOGO} className="w-16 h-16 rounded-2xl shadow-2xl border-2 border-white/10" alt="Logo" />
-                <h1 className="text-4xl font-black text-white tracking-tighter uppercase italic">Hire<span className="text-indigo-500">Map</span></h1>
+                <h1 className="text-4xl font-black text-white tracking-tighter uppercase italic">Hire<span className="text-indigo-400">Map</span></h1>
             </div>
 
             <div className="space-y-6">
-                <h2 className="text-6xl font-black text-white leading-tight uppercase tracking-tighter">
+                <h2 className="text-5xl sm:text-6xl font-black text-white leading-tight uppercase tracking-tighter">
                     Get access
                 </h2>
-                <p className="text-slate-400 text-lg leading-relaxed border-l-4 border-indigo-500 pl-6">
-                    Enter your credentials to get excess to our application.
+                <p className="text-slate-300 text-lg leading-relaxed border-l-4 border-indigo-500 pl-6">
+                    Enter your credentials to get access to our application.
                 </p>
             </div>
 
-            <div className="grid grid-cols-2 gap-4 pt-10">
+            <div className="grid grid-cols-2 gap-4 pt-8">
                 <div className="p-6 bg-white/5 backdrop-blur-md rounded-[2rem] border border-white/10 space-y-2">
                     <Activity className="text-emerald-400" size={24} />
-                    <p className="text-[10px] font-black text-slate-500 uppercase">Trusted by</p>
+                    <p className="text-[10px] font-black text-slate-400 uppercase">Trusted by</p>
                     <p className="text-2xl font-black text-white">1200+</p>
                 </div>
                 <div className="p-6 bg-white/5 backdrop-blur-md rounded-[2rem] border border-white/10 space-y-2">
                     <Globe className="text-indigo-400" size={24} />
-                    <p className="text-[10px] font-black text-slate-500 uppercase">Global Nodes</p>
+                    <p className="text-[10px] font-black text-slate-400 uppercase">Global Nodes</p>
                     <p className="text-2xl font-black text-white">128</p>
                 </div>
             </div>
@@ -106,10 +102,11 @@ const Login = () => {
       </div>
 
       {/* --- RIGHT SIDE: COMPRESSED LOGIN FORM --- */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-4 md:p-8 relative">
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-6 md:p-10 relative">
         <Link 
           to="/" 
-          className="absolute top-6 right-6 p-3 bg-white border border-slate-200 text-slate-400 rounded-xl hover:bg-slate-50 hover:text-indigo-600 transition-all shadow-lg active:scale-90 group z-[100]"
+          aria-label="Return to Home"
+          className="absolute top-6 right-6 p-3 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-500 dark:text-slate-400 rounded-xl hover:bg-slate-50 dark:hover:bg-white/10 hover:text-indigo-600 dark:hover:text-white transition-all shadow-sm active:scale-90 group z-[100]"
         >
           <X size={18} className="group-hover:rotate-90 transition-transform duration-300" />
         </Link>
@@ -117,42 +114,45 @@ const Login = () => {
         <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="w-full max-w-md space-y-4 sm:space-y-5"
+            className="w-full max-w-md space-y-5"
         >
             <header className="space-y-1">
-                <h3 className="text-4xl font-black text-slate-700 tracking-tighter uppercase leading-none">
-                    Welcome <span className="text-indigo-500">Back</span>
+                <h3 className="text-4xl font-black text-slate-900 dark:text-white tracking-tighter uppercase leading-none">
+                    Welcome <span className="text-indigo-600 dark:text-indigo-400">Back</span>
                 </h3>
+                <p className="text-slate-500 text-xs font-semibold">Sign in to your HireMap account</p>
             </header>
 
-            {/* ROLE TOGGLE - COMPRESSED */}
-            <div className="flex p-1 bg-slate-100 rounded-[1.2rem] shadow-inner relative overflow-hidden">
+            {/* ROLE TOGGLE */}
+            <div className="flex p-1 bg-slate-200/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-[1.2rem] shadow-inner relative overflow-hidden">
                 <button 
+                    type="button"
                     onClick={() => setRole('student')}
-                    className={`relative z-10 flex-1 flex items-center justify-center gap-2 py-3 rounded-[1rem] text-[9px] font-black uppercase tracking-widest transition-all duration-500 ${role === 'student' ? 'text-white' : 'text-slate-500'}`}
+                    className={`relative z-10 flex-1 flex items-center justify-center gap-2 py-2.5 rounded-[1rem] text-[10px] font-black uppercase tracking-wider transition-all duration-300 ${role === 'student' ? 'text-slate-900 dark:text-white font-black' : 'text-slate-500 dark:text-slate-400'}`}
                 >
-                    <User size={12} /> Student
+                    <User size={13} /> Student
                 </button>
                 <button 
+                    type="button"
                     onClick={() => setRole('recruiter')}
-                    className={`relative z-10 flex-1 flex items-center justify-center gap-2 py-3 rounded-[1rem] text-[9px] font-black uppercase tracking-widest transition-all duration-500 ${role === 'recruiter' ? 'text-white' : 'text-slate-500'}`}
+                    className={`relative z-10 flex-1 flex items-center justify-center gap-2 py-2.5 rounded-[1rem] text-[10px] font-black uppercase tracking-wider transition-all duration-300 ${role === 'recruiter' ? 'text-slate-900 dark:text-white font-black' : 'text-slate-500 dark:text-slate-400'}`}
                 >
-                    <Building2 size={12} /> Recruiter
+                    <Building2 size={13} /> Recruiter
                 </button>
                 <motion.div 
                     animate={{ x: role === 'student' ? '0%' : '100%' }}
-                    className="absolute top-1 left-1 bottom-1 w-[calc(50%-4px)] bg-slate-900 rounded-[1rem] shadow-lg"
+                    className="absolute top-1 left-1 bottom-1 w-[calc(50%-4px)] bg-white dark:bg-indigo-600 rounded-[1rem] shadow-sm"
                 />
             </div>
 
-            <form onSubmit={handleLogin} className="space-y-3 sm:space-y-4">
+            <form onSubmit={handleLogin} className="space-y-4">
                 <div className="space-y-1">
-                    <label className="text-[9px] font-black text-slate-400 uppercase ml-2 tracking-widest">Auth Email</label>
+                    <label className="text-[10px] font-bold text-slate-500 uppercase ml-2 tracking-wider">Email Address</label>
                     <div className="relative group">
-                        <Mail className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-300 group-focus-within:text-indigo-600 transition-colors" size={18} />
+                        <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-indigo-600 transition-colors" size={17} />
                         <input 
                             name="email" type="email" required value={formData.email} onChange={handleChange} 
-                            className="w-full bg-white border border-slate-200 px-12 py-3.5 sm:py-4 rounded-[1.2rem] text-slate-900 focus:border-indigo-600 outline-none transition-all font-bold placeholder:text-slate-300 shadow-sm text-sm" 
+                            className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 px-11 py-3.5 rounded-[1.2rem] text-slate-900 dark:text-white focus:border-indigo-600 outline-none transition-all font-semibold placeholder:text-slate-400 dark:placeholder:text-slate-600 shadow-sm text-sm" 
                             placeholder="yourname@hiremap.com" 
                         />
                     </div>
@@ -166,12 +166,12 @@ const Login = () => {
                         exit={{ opacity: 0, height: 0, marginTop: 0 }}
                         className="space-y-1 overflow-hidden"
                     >
-                        <label className="text-[9px] font-black text-indigo-500 uppercase ml-2 tracking-widest">Company Domain</label>
+                        <label className="text-[10px] font-bold text-indigo-600 dark:text-indigo-400 uppercase ml-2 tracking-wider">Company Domain</label>
                         <div className="relative group">
-                            <Building2 className="absolute left-5 top-1/2 -translate-y-1/2 text-indigo-200 group-focus-within:text-indigo-500 transition-colors" size={18} />
+                            <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 text-indigo-400 group-focus-within:text-indigo-600 transition-colors" size={17} />
                             <input 
                                 name="companyEmail" type="email" required={role === 'recruiter'} value={formData.companyEmail} onChange={handleChange} 
-                                className="w-full bg-indigo-50 border border-indigo-200 px-12 py-3.5 sm:py-4 rounded-[1.2rem] text-indigo-900 focus:border-indigo-600 outline-none transition-all font-bold placeholder:text-indigo-200 text-sm" 
+                                className="w-full bg-indigo-50/60 dark:bg-indigo-500/10 border border-indigo-200 dark:border-indigo-500/20 px-11 py-3.5 rounded-[1.2rem] text-slate-900 dark:text-white focus:border-indigo-600 outline-none transition-all font-semibold placeholder:text-indigo-300 text-sm" 
                                 placeholder="hr@company.com" 
                             />
                         </div>
@@ -181,46 +181,46 @@ const Login = () => {
 
                 <div className="space-y-1">
                     <div className="flex justify-between items-center px-2">
-                        <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Password</label>
-                        <Link to="/ForgetPassword" className="text-[9px] font-black text-indigo-500 uppercase tracking-widest hover:text-slate-900 transition-colors  underline-offset-4">Forget?</Link>
+                        <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Password</label>
+                        <Link to="/ForgetPassword" className="text-[10px] font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider hover:underline">Forgot?</Link>
                     </div>
                     <div className="relative group">
-                        <Lock className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-300 group-focus-within:text-indigo-600 transition-colors" size={18} />
+                        <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-indigo-600 transition-colors" size={17} />
                         <input 
                             name="password" type={showPassword ? "text" : "password"} required value={formData.password} onChange={handleChange} 
-                            className="w-full bg-white border border-slate-200 px-12 py-3.5 sm:py-4 rounded-[1.2rem] text-slate-900 focus:border-indigo-600 outline-none transition-all font-bold placeholder:text-slate-300 shadow-sm text-sm" 
+                            className="w-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 px-11 py-3.5 rounded-[1.2rem] text-slate-900 dark:text-white focus:border-indigo-600 outline-none transition-all font-semibold placeholder:text-slate-400 dark:placeholder:text-slate-600 shadow-sm text-sm" 
                             placeholder="••••••••" 
                         />
                         <button 
                             type="button"
                             onClick={() => setShowPassword(!showPassword)}
-                            className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-300 hover:text-indigo-600 transition-colors"
+                            className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-indigo-600 transition-colors"
                         >
-                            {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                            {showPassword ? <EyeOff size={17} /> : <Eye size={17} />}
                         </button>
                     </div>
                 </div>
 
                 {error && (
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="p-3 bg-rose-50 border border-rose-100 text-rose-500 rounded-xl text-[9px] font-black uppercase tracking-widest flex items-center gap-2">
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="p-3 bg-rose-50 dark:bg-rose-500/10 border border-rose-200 dark:border-rose-500/20 text-rose-600 dark:text-rose-400 rounded-xl text-[10px] font-bold uppercase tracking-wider flex items-center gap-2">
                         <Zap size={14} /> {error}
                     </motion.div>
                 )}
 
                 <button 
                     type="submit" disabled={loading}
-                    className="w-full bg-indigo-600 hover:bg-slate-900 text-white font-black py-4 sm:py-5 rounded-[1.2rem] transition-all shadow-lg shadow-indigo-100 uppercase tracking-[0.3em] text-[9px] flex items-center justify-center gap-3 active:scale-[0.98] duration-500 group"
+                    className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-black py-4 rounded-[1.2rem] transition-all shadow-md uppercase tracking-[0.3em] text-[10px] flex items-center justify-center gap-2.5 active:scale-[0.98]"
                 >
                     {loading ? <Loader2 className="animate-spin" size={18} /> : (
-                        <> Login <ArrowRight className="group-hover:translate-x-2 transition-transform" size={16} /> </>
+                        <> Login <ArrowRight className="group-hover:translate-x-1 transition-transform" size={15} /> </>
                     )}
                 </button>
             </form>
 
             <div className="relative py-2">
-                <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-slate-100"></div></div>
-                <div className="relative flex justify-center text-[8px] font-black uppercase tracking-[0.3em]">
-                    <span className="px-4 bg-[#F1F5F9] text-slate-500">Fast Pass</span>
+                <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-slate-200 dark:border-white/10"></div></div>
+                <div className="relative flex justify-center text-[9px] font-bold uppercase tracking-widest">
+                    <span className="px-4 bg-slate-50 dark:bg-[#0b0f19] text-slate-400 dark:text-slate-500">Fast Pass</span>
                 </div>
             </div>
 
@@ -231,10 +231,10 @@ const Login = () => {
                 />
             </div>
 
-            <footer className="pt-2 text-center space-y-2">
-                <p className="text-slate-800 text-[9px] font-black uppercase tracking-widest leading-none">Don't have an account?</p>
-                <Link to="/register" className="inline-block text-slate-900 hover:text-indigo-600 font-black uppercase tracking-widest text-[9px] transition-all border-b-2 border-indigo-200 pb-0.5 group">
-                    Sign<span className="group-hover:pl-1 transition-all">Up</span>
+            <footer className="pt-2 text-center space-y-1">
+                <p className="text-slate-500 text-xs">Don't have an account?</p>
+                <Link to="/register" className="inline-block text-indigo-600 dark:text-indigo-400 hover:underline font-bold uppercase tracking-wider text-xs">
+                    Sign Up
                 </Link>
             </footer>
         </motion.div>

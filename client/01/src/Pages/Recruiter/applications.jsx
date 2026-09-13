@@ -89,28 +89,28 @@ const EnlistedApplicants = () => {
   };
 
   if (loading && jobs.length === 0) return (
-    <div className="min-h-screen bg-[#0a0f1a] flex flex-col items-center justify-center">
-      <Loader2 className="animate-spin text-indigo-500 mb-4" size={48} />
-      <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Scanning Deployment Nodes...</p>
+    <div className="min-h-screen bg-slate-50 dark:bg-[#0a0f1a] flex flex-col items-center justify-center">
+      <Loader2 className="animate-spin text-indigo-600 dark:text-indigo-500 mb-4" size={48} />
+      <p className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Scanning Positions...</p>
     </div>
   );
 
   return (
-    <div className="min-h-screen bg-[#09141e] text-slate-200 pb-20 selection:bg-indigo-500/30">
+    <div className="min-h-screen bg-slate-50 dark:bg-[#09141e] text-slate-800 dark:text-slate-200 pb-20 selection:bg-indigo-500/20 transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-6 py-12">
         
         {/* --- HEADER --- */}
-        <header className="mb-12 flex justify-between items-end">
+        <header className="mb-10 flex justify-between items-end">
           <div>
             <button 
               onClick={() => selectedJob ? setSelectedJob(null) : navigate('/RecruiterDashboard')} 
-              className="flex items-center gap-2 text-slate-500 font-black text-[10px] uppercase tracking-widest hover:text-white mb-6 transition-all group"
+              className="flex items-center gap-2 text-slate-500 dark:text-slate-400 font-bold text-[10px] uppercase tracking-wider hover:text-slate-900 dark:hover:text-white mb-6 transition-all group"
             >
               <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" /> 
               {selectedJob ? "Back to Active Jobs" : "Home"}
             </button>
-            <h1 className="text-5xl font-black text-white uppercase tracking-tighter leading-none">
-              Applications 
+            <h1 className="text-4xl sm:text-5xl font-black text-slate-900 dark:text-white uppercase tracking-tighter leading-none">
+              Applications
             </h1>
           </div>
         </header>
@@ -120,14 +120,14 @@ const EnlistedApplicants = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {jobs.map((job) => (
               <motion.div 
-                whileHover={{ y: -5 }}
+                whileHover={{ y: -4 }}
                 key={job._id}
                 onClick={() => fetchApplicants(job._id)}
-                className="bg-white/5 border border-white/10 p-8 rounded-[2.5rem] cursor-pointer hover:border-indigo-500/50 transition-all group relative overflow-hidden"
+                className="bg-white dark:bg-white/5 border border-slate-200/90 dark:border-white/10 p-8 rounded-[2.5rem] cursor-pointer hover:border-indigo-400 transition-all group relative overflow-hidden shadow-sm hover:shadow-md dark:shadow-xl"
               >
-                <h3 className="text-xl font-black text-white uppercase tracking-tight mb-2">{job.title}</h3>
-                <div className="flex items-center gap-2 text-[10px] font-black text-indigo-400 uppercase tracking-widest">
-                  view applications <ChevronRight size={14} />
+                <h3 className="text-xl font-black text-slate-900 dark:text-white uppercase tracking-tight mb-2">{job.title}</h3>
+                <div className="flex items-center gap-1.5 text-[10px] font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">
+                  View Applications <ChevronRight size={14} />
                 </div>
               </motion.div>
             ))}
@@ -137,51 +137,51 @@ const EnlistedApplicants = () => {
         {/* --- VIEW 2: APPLICANT MATRIX --- */}
         {selectedJob && (
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
-            <div className="bg-white/5 border border-white/10 rounded-[3rem] overflow-hidden backdrop-blur-xl">
+            <div className="bg-white dark:bg-white/5 border border-slate-200/90 dark:border-white/10 rounded-[3rem] overflow-hidden backdrop-blur-xl shadow-sm dark:shadow-xl">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="border-b border-white/5 bg-white/[0.02]">
-                    <th className="p-8 text-[10px] font-black text-slate-500 uppercase tracking-widest"> Name</th>
-                    <th className="p-8 text-[10px] font-black text-slate-500 uppercase tracking-widest text-center">HireFit Match</th>
-                    <th className="p-8 text-[10px] font-black text-slate-500 uppercase tracking-widest text-center">HireMap Analysis</th>
-                    <th className="p-8 text-[10px] font-black text-slate-500 uppercase tracking-widest text-right">Command Logic</th>
+                  <tr className="border-b border-slate-200/80 dark:border-white/5 bg-slate-50 dark:bg-white/[0.02]">
+                    <th className="p-6 sm:p-8 text-[10px] font-black text-slate-500 uppercase tracking-wider">Name</th>
+                    <th className="p-6 sm:p-8 text-[10px] font-black text-slate-500 uppercase tracking-wider text-center">HireFit Match</th>
+                    <th className="p-6 sm:p-8 text-[10px] font-black text-slate-500 uppercase tracking-wider text-center">ATS Strength</th>
+                    <th className="p-6 sm:p-8 text-[10px] font-black text-slate-500 uppercase tracking-wider text-right">Actions</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody className="divide-y divide-slate-100 dark:divide-white/5">
                   {applicants.map((app) => (
-                    <tr key={app._id} className="border-b border-white/5 hover:bg-white/[0.02] transition-colors group">
-                      <td className="p-8">
+                    <tr key={app._id} className="hover:bg-slate-50/70 dark:hover:bg-white/[0.02] transition-colors group">
+                      <td className="p-6 sm:p-8">
                         <div className="flex items-center gap-4">
-                          <div className="w-10 h-10 bg-indigo-500/10 rounded-lg flex items-center justify-center text-indigo-400 font-black border border-indigo-500/20">
+                          <div className="w-10 h-10 bg-indigo-50 dark:bg-indigo-500/10 rounded-xl flex items-center justify-center text-indigo-600 dark:text-indigo-400 font-black border border-indigo-100 dark:border-indigo-500/20">
                             {app.studentName?.charAt(0) || "U"}
                           </div>
-                          <p className="font-black text-white uppercase tracking-tight">{app.studentName}</p>
+                          <p className="font-black text-slate-900 dark:text-white uppercase tracking-tight">{app.studentName}</p>
                         </div>
                       </td>
-                      <td className="p-8">
+                      <td className="p-6 sm:p-8">
                         <div className="flex flex-col items-center">
-                          <span className={`text-lg font-black ${app.resumeFitScore > 75 ? 'text-emerald-400' : 'text-amber-400'}`}>
+                          <span className={`text-lg font-black ${app.resumeFitScore > 75 ? 'text-emerald-600 dark:text-emerald-400' : 'text-amber-600 dark:text-amber-400'}`}>
                             {app.resumeFitScore}%
                           </span>
-                          <span className="text-[8px] font-bold text-slate-600 uppercase tracking-[0.2em]">Job Relevance</span>
+                          <span className="text-[8px] font-bold text-slate-400 uppercase tracking-wider">Relevance</span>
                         </div>
                       </td>
-                      <td className="p-8">
+                      <td className="p-6 sm:p-8">
                         <div className="flex flex-col items-center">
-                          <span className="text-lg font-black text-indigo-400">
+                          <span className="text-lg font-black text-indigo-600 dark:text-indigo-400">
                             {app.analysisScore}%
                           </span>
-                          <span className="text-[8px] font-bold text-slate-600 uppercase tracking-[0.2em]">Profile Strength</span>
+                          <span className="text-[8px] font-bold text-slate-400 uppercase tracking-wider">Score</span>
                         </div>
                       </td>
-                      <td className="p-8 text-right">
-                        <div className="flex items-center justify-end gap-3">
+                      <td className="p-6 sm:p-8 text-right">
+                        <div className="flex items-center justify-end gap-2.5">
                           <button 
                             onClick={() => setViewingApp(app)}
-                            className="p-3 bg-white/5 border border-white/10 rounded-xl text-white hover:bg-indigo-600 transition-all"
+                            className="p-2.5 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl text-slate-700 dark:text-white hover:bg-indigo-600 hover:text-white transition-all shadow-sm"
                             title="Full Dossier"
                           >
-                            <Search size={16} />
+                            <Search size={15} />
                           </button>
                           
                           {/* QUICK STATUS ACTIONS */}
@@ -189,27 +189,29 @@ const EnlistedApplicants = () => {
                             <div className="flex gap-2">
                               <button 
                                 onClick={() => handleStatusChange(app._id, 'Shortlisted')} 
-                                className="p-3 bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 rounded-xl hover:bg-emerald-500 hover:text-white transition-all"
+                                className="p-2.5 bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 text-emerald-600 dark:text-emerald-400 rounded-xl hover:bg-emerald-600 hover:text-white transition-all shadow-sm"
+                                title="Shortlist"
                               >
-                                <CheckCircle size={16} />
+                                <CheckCircle size={15} />
                               </button>
                               <button 
                                 onClick={() => handleStatusChange(app._id, 'Rejected')} 
-                                className="p-3 bg-rose-500/10 border border-rose-500/20 text-rose-500 rounded-xl hover:bg-rose-500 hover:text-white transition-all"
+                                className="p-2.5 bg-rose-50 dark:bg-rose-500/10 border border-rose-200 dark:border-rose-500/20 text-rose-600 dark:text-rose-400 rounded-xl hover:bg-rose-600 hover:text-white transition-all shadow-sm"
+                                title="Reject"
                               >
-                                <XCircle size={16} />
+                                <XCircle size={15} />
                               </button>
                             </div>
                           ) : (
                             <div className="flex items-center gap-2">
-                              <span className={`px-3 py-1.5 rounded-lg text-[9px] font-black uppercase tracking-widest border ${
-                                app.status === 'Shortlisted' ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' : 'bg-rose-500/10 text-rose-400 border-rose-500/20'
+                              <span className={`px-2.5 py-1 rounded-lg text-[9px] font-black uppercase tracking-wider border ${
+                                app.status === 'Shortlisted' ? 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-200 dark:border-emerald-500/20' : 'bg-rose-50 dark:bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-200 dark:border-rose-500/20'
                               }`}>
                                 {app.status}
                               </span>
                               <button 
                                 onClick={() => handleStatusChange(app._id, 'Pending')} 
-                                className="text-[8px] font-bold text-slate-600 hover:text-white uppercase underline underline-offset-4"
+                                className="text-[8px] font-bold text-slate-400 hover:text-slate-900 dark:hover:text-white uppercase underline underline-offset-2"
                               >
                                 Reset
                               </button>
@@ -231,52 +233,52 @@ const EnlistedApplicants = () => {
         {viewingApp && (
           <motion.div 
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="absolute inset-0 z-50 flex items-center justify-end p-6 bg-[#0a0f1a]/80 backdrop-blur-sm"
+            className="fixed inset-0 z-50 flex items-center justify-end p-4 sm:p-6 bg-slate-900/50 dark:bg-[#0a0f1a]/80 backdrop-blur-sm"
           >
             <motion.div 
               initial={{ x: 500 }} animate={{ x: 0 }} exit={{ x: 500 }}
-              className="w-full max-w-xl h-full bg-[#0f172a] border-l border-white/10 shadow-2xl overflow-y-auto rounded-l-[3rem] p-12 relative"
+              className="w-full max-w-xl h-full bg-white dark:bg-[#0f172a] border-l border-slate-200 dark:border-white/10 shadow-2xl overflow-y-auto rounded-l-[3rem] p-8 sm:p-12 relative"
             >
-              <button onClick={() => setViewingApp(null)} className="absolute top-8 right-8 w-10 h-10 bg-white/5 rounded-full flex items-center justify-center text-slate-500 hover:text-white transition-all">
-                <ArrowLeft size={20} className="rotate-180" />
+              <button onClick={() => setViewingApp(null)} className="absolute top-8 right-8 w-10 h-10 bg-slate-100 dark:bg-white/5 rounded-full flex items-center justify-center text-slate-500 hover:text-slate-900 dark:hover:text-white transition-all shadow-sm">
+                <ArrowLeft size={18} className="rotate-180" />
               </button>
 
-              <div className="space-y-10">
-                <div className="flex items-center gap-6">
-                  <div className="w-20 h-20 bg-gradient-to-br from-indigo-500 to-rose-500 rounded-2xl flex items-center justify-center text-white text-3xl font-black">
+              <div className="space-y-8">
+                <div className="flex items-center gap-5">
+                  <div className="w-16 h-16 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-2xl flex items-center justify-center text-white text-2xl font-black shadow-md">
                     {viewingApp.studentName?.charAt(0)}
                   </div>
                   <div>
-                    <h2 className="text-3xl font-black text-white uppercase tracking-tighter">{viewingApp.studentName}</h2>
+                    <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white uppercase tracking-tighter">{viewingApp.studentName}</h2>
                   </div>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-white/5 p-6 rounded-2xl border border-white/5">
-                    <Zap className="text-amber-400 mb-2" size={20} />
-                    <p className="text-[10px] font-black text-slate-500 uppercase mb-1">HireFit Score</p>
-                    <p className="text-2xl font-black text-white">{viewingApp.resumeFitScore}%</p>
+                  <div className="bg-slate-50 dark:bg-white/5 p-5 rounded-2xl border border-slate-200/80 dark:border-white/5">
+                    <Zap className="text-amber-500 mb-1.5" size={18} />
+                    <p className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase mb-1">HireFit Score</p>
+                    <p className="text-2xl font-black text-slate-900 dark:text-white">{viewingApp.resumeFitScore}%</p>
                   </div>
-                  <div className="bg-white/5 p-6 rounded-2xl border border-white/5">
-                    <BrainCircuit className="text-indigo-400 mb-2" size={20} />
-                    <p className="text-[10px] font-black text-slate-500 uppercase mb-1">ATS Strength</p>
-                    <p className="text-2xl font-black text-white">{viewingApp.analysisScore}%</p>
+                  <div className="bg-slate-50 dark:bg-white/5 p-5 rounded-2xl border border-slate-200/80 dark:border-white/5">
+                    <BrainCircuit className="text-indigo-600 dark:text-indigo-400 mb-1.5" size={18} />
+                    <p className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase mb-1">ATS Strength</p>
+                    <p className="text-2xl font-black text-slate-900 dark:text-white">{viewingApp.analysisScore}%</p>
                   </div>
                 </div>
 
-                <div className="bg-indigo-500/5 border border-indigo-500/10 rounded-3xl p-8 space-y-6">
-                   <h3 className="text-xs font-black text-white uppercase tracking-widest flex items-center gap-2">
-                     <ShieldCheck size={16} className="text-indigo-400" /> Operational Actions
+                <div className="bg-indigo-50/50 dark:bg-indigo-500/5 border border-indigo-100 dark:border-indigo-500/10 rounded-3xl p-6 space-y-4">
+                   <h3 className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-2">
+                     <ShieldCheck size={16} className="text-indigo-600 dark:text-indigo-400" /> Actions
                    </h3>
                    
                    <div className="grid gap-3">
-                      <a href={viewingApp.resumeDriveLink} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-3 w-full py-4 bg-white text-black rounded-xl font-black uppercase text-[10px] tracking-widest hover:bg-indigo-500 hover:text-white transition-all">
-                        View resume<ExternalLink size={14} />
+                      <a href={viewingApp.resumeDriveLink} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 w-full py-3.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl font-black uppercase text-[10px] tracking-wider transition-all shadow-sm">
+                        View Resume <ExternalLink size={14} />
                       </a>
                       
                       <button 
-                        onClick={() => handleMailOperator(viewingApp.applicant?.email, selectedJob.title, viewingApp.studentName)}
-                        className="flex items-center justify-center gap-3 w-full py-4 bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 rounded-xl font-black uppercase text-[10px] tracking-widest hover:bg-indigo-600 hover:text-white transition-all"
+                        onClick={() => handleMailOperator(viewingApp.applicant?.email, selectedJob?.title, viewingApp.studentName)}
+                        className="flex items-center justify-center gap-2 w-full py-3.5 bg-slate-100 dark:bg-indigo-500/10 border border-slate-200 dark:border-indigo-500/20 text-slate-800 dark:text-indigo-400 rounded-xl font-black uppercase text-[10px] tracking-wider hover:bg-indigo-600 hover:text-white transition-all shadow-sm"
                       >
                         Contact Applicant <Send size={14} />
                       </button>

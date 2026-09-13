@@ -47,11 +47,11 @@ const LoginSuccess = () => {
   }, [searchParams, navigate, login]); 
 
   return (
-    <div className="h-screen bg-[#020617] flex flex-col items-center justify-center space-y-6">
-      <div className="w-16 h-16 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin" />
+    <div className="h-screen bg-slate-50 dark:bg-[#020617] flex flex-col items-center justify-center space-y-6 transition-colors duration-200">
+      <div className="w-16 h-16 border-4 border-indigo-600 dark:border-indigo-500 border-t-transparent rounded-full animate-spin" />
       <div className="text-center">
-        <h2 className="text-indigo-500 font-black uppercase tracking-[0.5em] text-lg">Finalizing Sync</h2>
-        <p className="text-slate-500 text-[10px] font-bold uppercase tracking-[0.3em] mt-2">Stable Connection Established...</p>
+        <h2 className="text-indigo-600 dark:text-indigo-400 font-black uppercase tracking-[0.4em] text-lg">Finalizing Sync</h2>
+        <p className="text-slate-400 dark:text-slate-500 text-xs font-bold uppercase tracking-wider mt-2">Connection Established...</p>
       </div>
     </div>
   );

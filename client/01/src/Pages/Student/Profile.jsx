@@ -99,54 +99,54 @@ const Profile = () => {
 
   if (viewMode === 'loading') {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#09141e]">
-        <Loader2 className="animate-spin text-indigo-500" size={40} />
+      <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-[#09141e]">
+        <Loader2 className="animate-spin text-indigo-600 dark:text-indigo-500" size={40} />
       </div>
     );
   }
 
   if (viewMode === 'empty' || showReframeModal) {
     return (
-      <div className="min-h-screen bg-[#09141e] flex items-center justify-center p-4 relative overflow-hidden">
+      <div className="min-h-screen bg-slate-50 dark:bg-[#09141e] flex items-center justify-center p-4 relative overflow-hidden transition-colors duration-200">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-indigo-600/10 rounded-full blur-[120px] animate-pulse"></div>
           <div className="absolute bottom-[10%] right-[-10%] w-[40%] h-[40%] bg-indigo-500/10 rounded-full blur-[120px] animate-pulse"></div>
         </div>
         {showReframeModal && (
-          <button onClick={() => setShowReframeModal(false)} className="absolute top-6 right-6 p-3 bg-white/5 text-white rounded-full border border-white/10 z-50 hover:bg-white/10 transition-all">
+          <button onClick={() => setShowReframeModal(false)} className="absolute top-6 right-6 p-3 bg-white dark:bg-white/5 text-slate-700 dark:text-white rounded-full border border-slate-200 dark:border-white/10 z-50 hover:bg-slate-100 dark:hover:bg-white/10 transition-all shadow-md">
             <X size={20} />
           </button>
         )}
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="relative z-10 w-full max-w-lg p-[1px] bg-indigo-500/30 rounded-[3.5rem] shadow-2xl">
-          <div className="bg-[#09141e]/95 backdrop-blur-3xl rounded-[3.4rem] overflow-hidden border border-white/5">
-            <div className="p-10 text-center bg-indigo-600/10 border-b border-white/5">
-               <h1 className="text-3xl font-black text-white mb-2 uppercase tracking-tighter">Build Your Identity</h1>
-               <p className="text-slate-400 text-sm font-medium tracking-tight">Upload your Resume(pdf)</p>
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="relative z-10 w-full max-w-lg p-[1px] bg-gradient-to-r from-indigo-500/30 via-purple-500/30 to-indigo-500/30 rounded-[3.5rem] shadow-2xl">
+          <div className="bg-white/95 dark:bg-[#09141e]/95 backdrop-blur-3xl rounded-[3.4rem] overflow-hidden border border-slate-200/90 dark:border-white/5">
+            <div className="p-10 text-center bg-indigo-50 dark:bg-indigo-600/10 border-b border-slate-100 dark:border-white/5">
+               <h1 className="text-3xl font-black text-slate-900 dark:text-white mb-2 uppercase tracking-tighter">Build Your Identity</h1>
+               <p className="text-slate-600 dark:text-slate-400 text-sm font-medium tracking-tight">Upload your Resume (PDF)</p>
             </div>
             <div className="p-10">
               {isAnalyzing ? (
                  <div className="flex flex-col items-center justify-center py-10">
                    <div className="relative">
-                      <Loader2 className="animate-spin text-indigo-500 mb-6" size={56} />
+                      <Loader2 className="animate-spin text-indigo-600 dark:text-indigo-500 mb-6" size={56} />
                       <div className="absolute inset-0 bg-indigo-500/30 blur-2xl rounded-full"></div>
                    </div>
-                   <h3 className="text-xl font-black text-white uppercase tracking-widest">Analyzing Data...</h3>
+                   <h3 className="text-xl font-black text-slate-900 dark:text-white uppercase tracking-widest">Analyzing Data...</h3>
                    <p className="text-slate-500 text-xs mt-2 uppercase tracking-widest">Parsing career trajectory</p>
                  </div>
               ) : (
-                <label className="border-2 border-dashed border-indigo-500/20 rounded-[2.5rem] h-64 flex flex-col items-center justify-center cursor-pointer hover:bg-white/5 hover:border-indigo-500/40 transition-all group">
+                <label className="border-2 border-dashed border-slate-200 dark:border-indigo-500/20 rounded-[2.5rem] h-64 flex flex-col items-center justify-center cursor-pointer hover:bg-slate-50 dark:hover:bg-white/5 hover:border-indigo-400 transition-all group">
                   <input type="file" accept=".pdf" className="hidden" onChange={(e) => handleResumeUpload(e.target.files[0])} />
-                  <div className="flex flex-col items-center gap-4 text-slate-500">
-                                <UploadCloud size={40} />
-                                <div className="text-center">
-                                  <p className="text-[10px] font-black uppercase tracking-widest leading-none">Drop Resume (PDF)</p>
-                                  <p className="text-[9px] text-slate-500 font-bold uppercase tracking-widest mt-2">Limit: 1MB</p>
-                                </div>
-                            </div>
+                  <div className="flex flex-col items-center gap-4 text-slate-400 dark:text-slate-500">
+                    <UploadCloud size={40} className="text-indigo-600 dark:text-indigo-400" />
+                    <div className="text-center">
+                      <p className="text-[10px] font-black uppercase tracking-widest leading-none text-slate-800 dark:text-slate-300">Drop Resume (PDF)</p>
+                      <p className="text-[9px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-widest mt-2">Limit: 1MB</p>
+                    </div>
+                  </div>
                   <span className="text-[10px] text-slate-500 mt-3 font-bold uppercase tracking-[0.2em] italic text-center px-6">Auto-populates education, skills, and projects</span>
                 </label>
               )}
-              {error && <p className="text-rose-400 text-center text-[10px] mt-6 uppercase font-black tracking-[0.3em]">{error}</p>}
+              {error && <p className="text-rose-500 dark:text-rose-400 text-center text-[10px] mt-6 uppercase font-black tracking-[0.3em]">{error}</p>}
             </div>
           </div>
         </motion.div>
@@ -156,8 +156,8 @@ const Profile = () => {
 
   if (viewMode === 'recruiter') {
     return (
-      <div className="min-h-screen bg-[#09141e] py-10 px-4 flex flex-col items-center">
-         <button onClick={() => setViewMode('dashboard')} className="mb-8 flex items-center gap-3 bg-[#09141e] text-slate-200 px-8 py-3 rounded-2xl font-black uppercase text-[10px] tracking-widest hover:bg-white/5 transition-all border border-white/10 shadow-2xl">
+      <div className="min-h-screen bg-slate-100 dark:bg-[#09141e] py-10 px-4 flex flex-col items-center transition-colors duration-200">
+         <button onClick={() => setViewMode('dashboard')} className="mb-8 flex items-center gap-3 bg-white dark:bg-[#09141e] text-slate-800 dark:text-slate-200 px-8 py-3 rounded-2xl font-black uppercase text-[10px] tracking-widest hover:bg-slate-50 dark:hover:bg-white/5 transition-all border border-slate-200 dark:border-white/10 shadow-md">
             <ChevronRight className="rotate-180" size={18}/> Back to Console
          </button>
          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="bg-white w-full max-w-[21cm] min-h-[29.7cm] shadow-2xl p-16 text-slate-900 rounded-sm">
@@ -201,88 +201,78 @@ const Profile = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#09141e] text-slate-200 pb-20 relative overflow-x-hidden font-sans">
-      {/* Background Aesthetic */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        <div className="absolute inset-0" style={{ 
-          backgroundSize: '60px 60px',
-        }} />
-      </div>
-
+    <div className="min-h-screen bg-slate-50 dark:bg-[#09141e] text-slate-800 dark:text-slate-200 pb-20 relative overflow-x-hidden font-sans transition-colors duration-200">
       {/* Branded Header */}
-      <div className="top-0 z-40  backdrop-blur-3xl ">
-        <div className="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
-          <div className="flex items-center gap-5">
-             <div className="w-14 h-14 bg-indigo-600 rounded-2xl flex items-center justify-center text-white font-black text-2xl shadow-2xl shadow-indigo-500/30 ring-1 ring-white/20">
+      <div className="top-0 z-40 bg-white/80 dark:bg-[#09141e]/80 border-b border-slate-200/80 dark:border-white/5 backdrop-blur-3xl">
+        <div className="max-w-7xl mx-auto px-6 h-20 sm:h-24 flex items-center justify-between">
+          <div className="flex items-center gap-4 sm:gap-5">
+             <div className="w-12 h-12 sm:w-14 sm:h-14 bg-indigo-600 rounded-2xl flex items-center justify-center text-white font-black text-xl sm:text-2xl shadow-md">
                {(profileData?.fullName || profileData?.name || "U").charAt(0).toUpperCase()}
              </div>
              <div>
-               <h1 className="font-black text-white text-xl tracking-tighter uppercase leading-none">{profileData?.fullName || profileData?.name}</h1>
-               
+               <h1 className="font-black text-slate-900 dark:text-white text-lg sm:text-xl tracking-tighter uppercase leading-none">{profileData?.fullName || profileData?.name}</h1>
              </div>
           </div>
 
-          <div className="flex items-center gap-6">
-             <div className="hidden md:flex items-center gap-3 bg-indigo-600/10 px-5 py-2.5 rounded-2xl border border-indigo-500/20 backdrop-blur-md">
-                <Zap size={18} className="text-indigo-400 fill-indigo-400" />
-                <span className="font-black text-white text-lg">{profileData?.coins || 0}</span>
+          <div className="flex items-center gap-3 sm:gap-6">
+             <div className="hidden md:flex items-center gap-3 bg-indigo-50 dark:bg-indigo-600/10 px-5 py-2.5 rounded-2xl border border-indigo-100 dark:border-indigo-500/20">
+                <Zap size={18} className="text-indigo-600 dark:text-indigo-400 fill-current" />
+                <span className="font-black text-slate-900 dark:text-white text-lg">{profileData?.coins || 0}</span>
                 <span className="text-[10px] text-slate-500 font-black uppercase tracking-tighter">Credits</span>
              </div>
-             <div className="flex items-center gap-3">
-                <button onClick={() => navigate('/CoinStore')} className="p-3.5 bg-white/5 hover:bg-indigo-600 text-slate-300 hover:text-white rounded-2xl border border-white/5 transition-all shadow-xl">
-                  <Plus size={22} />
+             <div className="flex items-center gap-2 sm:gap-3">
+                <button onClick={() => navigate('/CoinStore')} aria-label="Purchase Coins" className="p-3 bg-slate-100 dark:bg-white/5 hover:bg-indigo-600 text-slate-700 dark:text-slate-300 hover:text-white rounded-2xl border border-slate-200 dark:border-white/5 transition-all shadow-sm">
+                  <Plus size={20} />
                 </button>
-                <button onClick={() => setShowReframeModal(true)} className="p-3.5 bg-white/5 hover:bg-indigo-600 text-slate-300 hover:text-white rounded-2xl border border-white/5 transition-all shadow-xl">
-                  <RefreshCw size={22} />
+                <button onClick={() => setShowReframeModal(true)} aria-label="Refresh Profile" className="p-3 bg-slate-100 dark:bg-white/5 hover:bg-indigo-600 text-slate-700 dark:text-slate-300 hover:text-white rounded-2xl border border-slate-200 dark:border-white/5 transition-all shadow-sm">
+                  <RefreshCw size={20} />
                 </button>
-                <button onClick={() => setViewMode('recruiter')} className="flex items-center gap-3 bg-indigo-600 text-white px-8 py-3.5 rounded-2xl font-black uppercase text-[10px] tracking-[0.2em] hover:bg-indigo-500 transition-all shadow-2xl shadow-indigo-500/10">
-                  <Eye size={20} /> <span className="hidden sm:inline">view details</span>
+                <button onClick={() => setViewMode('recruiter')} className="flex items-center gap-2 bg-indigo-600 text-white px-5 sm:px-8 py-3 sm:py-3.5 rounded-2xl font-black uppercase text-[10px] tracking-[0.2em] hover:bg-indigo-500 transition-all shadow-md active:scale-95">
+                  <Eye size={18} /> <span className="hidden sm:inline">view details</span>
                 </button>
              </div>
           </div>
         </div>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 py-12 space-y-12">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-           <motion.div initial={{opacity:0, scale:0.98}} animate={{opacity:1, scale:1}} className="lg:col-span-2 bg-[#09141e]/60 backdrop-blur-3xl rounded-[3.5rem] p-10 md:p-14 border border-white/5 relative group overflow-hidden shadow-2xl">
-              <div className="absolute top-0 right-0 w-80 h-80 bg-indigo-500/5 rounded-full blur-[100px] -mr-24 -mt-24 group-hover:bg-indigo-500/10 transition-all duration-1000"></div>
+      <div className="relative z-10 max-w-7xl mx-auto px-6 py-10 sm:py-12 space-y-10 sm:space-y-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 sm:gap-10">
+           <motion.div initial={{opacity:0, scale:0.98}} animate={{opacity:1, scale:1}} className="lg:col-span-2 bg-white dark:bg-[#09141e]/60 backdrop-blur-3xl rounded-[3rem] p-8 sm:p-12 border border-slate-200/90 dark:border-white/5 relative group overflow-hidden shadow-sm dark:shadow-2xl">
               <div className="relative">
-                <h2 className="text-4xl font-black text-white mb-8 uppercase tracking-tighter">Professional Summary</h2>
-                <p className="text-slate-400 text-xl leading-relaxed font-medium max-w-3xl ">"{profileData?.summary || " No summary provided."}"</p>
+                <h2 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white mb-6 uppercase tracking-tighter">Professional Summary</h2>
+                <p className="text-slate-600 dark:text-slate-300 text-base sm:text-xl leading-relaxed font-medium max-w-3xl">"{profileData?.summary || "No summary provided."}"</p>
               </div>
            </motion.div>
 
-           <div className="bg-[#09141e]/40 backdrop-blur-3xl rounded-[3.5rem] p-12 border border-white/5 flex flex-col items-center justify-center text-center shadow-2xl relative overflow-hidden group">
-              <div className="absolute inset-0 bg-gradient-to-br from-indigo-600/10 to-transparent opacity-30"></div>
+           <div className="bg-white dark:bg-[#09141e]/40 backdrop-blur-3xl rounded-[3rem] p-10 border border-slate-200/90 dark:border-white/5 flex flex-col items-center justify-center text-center shadow-sm dark:shadow-2xl relative overflow-hidden group">
               {(() => {
-                 const config = (profileData?.atsScore >= 90) ? { label: "Elite", color: "text-emerald-400" } : 
-                                (profileData?.atsScore >= 80) ? { label: "Master", color: "text-indigo-400" } :
-                                { label: "Verified", color: "text-indigo-400" };
+                 const config = (profileData?.atsScore >= 90) ? { label: "Elite", color: "text-emerald-500" } : 
+                                (profileData?.atsScore >= 80) ? { label: "Master", color: "text-indigo-600 dark:text-indigo-400" } :
+                                { label: "Verified", color: "text-indigo-600 dark:text-indigo-400" };
                  return (
                    <div className="relative z-10 w-full flex flex-col items-center">
-  <h3 className="text-slate-500 font-black uppercase tracking-[0.4em] text-[10px] mb-10">
+  <h3 className="text-slate-400 dark:text-slate-500 font-black uppercase tracking-[0.3em] text-[10px] mb-8">
     HireMap score
   </h3>
   
-  <div className="w-48 h-48 rounded-full border-[10px] border-white/5 flex items-center justify-center relative mb-10 mx-auto group-hover:scale-105 transition-transform duration-700 shadow-[0_0_50px_rgba(99,102,241,0.1)]">
+  <div className="w-44 h-44 rounded-full border-[8px] border-slate-100 dark:border-white/5 flex items-center justify-center relative mb-8 mx-auto group-hover:scale-105 transition-transform duration-500 shadow-sm">
     <svg className="absolute inset-0 w-full h-full -rotate-90 scale-110" viewBox="0 0 100 100">
-      <circle cx="50" cy="50" r="46" stroke="currentColor" strokeWidth="6" fill="transparent" className="text-white/5" />
+      <circle cx="50" cy="50" r="46" stroke="currentColor" strokeWidth="6" fill="transparent" className="text-slate-100 dark:text-white/5" />
       <circle 
         cx="50" cy="50" r="46" 
         stroke="currentColor" 
         strokeWidth="6" 
         fill="transparent" 
         strokeDasharray={`${289 * ((profileData?.atsScore || 0) / 100)} 289`} 
-        className={`${config.color} transition-all duration-1000 shadow-2xl`} 
+        className={`${config.color} transition-all duration-1000`} 
         strokeLinecap="round" 
       />
     </svg>
     <div className="text-center">
-      <span className="text-6xl font-black text-white block tracking-tighter leading-none">
+      <span className="text-5xl sm:text-6xl font-black text-slate-900 dark:text-white block tracking-tighter leading-none">
         {profileData?.atsScore || 0}
       </span>
-      <span className="text-[10px] text-slate-500 font-black tracking-[0.4em] uppercase mt-2 block">
+      <span className="text-[10px] text-slate-400 font-bold tracking-[0.3em] uppercase mt-1 block">
         Score
       </span>
     </div>
@@ -291,13 +281,13 @@ const Profile = () => {
   {/* --- IMPROVE SCORE BUTTON --- */}
   <Link 
     to="/ResumeAI" 
-    className="group/btn relative flex items-center gap-3 px-8 py-4 bg-indigo-600/10 border border-indigo-500/30 rounded-2xl transition-all duration-500 hover:bg-indigo-600 hover:border-indigo-400 shadow-[0_0_20px_rgba(99,102,241,0.1)] hover:shadow-[0_0_30px_rgba(99,102,241,0.4)]"
+    className="group/btn relative flex items-center gap-3 px-6 py-3.5 bg-indigo-50 dark:bg-indigo-600/10 border border-indigo-200 dark:border-indigo-500/30 rounded-2xl transition-all duration-300 hover:bg-indigo-600 hover:text-white shadow-sm"
   >
-    <Zap size={16} className="text-indigo-400 group-hover/btn:text-white group-hover/btn:animate-pulse transition-colors" />
-    <span className="text-[10px] font-black text-white uppercase tracking-[0.2em]">
+    <Zap size={16} className="text-indigo-600 dark:text-indigo-400 group-hover/btn:text-white transition-colors" />
+    <span className="text-[10px] font-black text-indigo-700 dark:text-white group-hover/btn:text-white uppercase tracking-[0.2em]">
       Improve Score
     </span>
-    <ChevronRight size={14} className="text-indigo-400 group-hover/btn:text-white group-hover/btn:translate-x-1 transition-all" />
+    <ChevronRight size={14} className="text-indigo-600 dark:text-indigo-400 group-hover/btn:text-white group-hover/btn:translate-x-1 transition-all" />
   </Link>
 </div>
                  );
@@ -305,79 +295,78 @@ const Profile = () => {
            </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-           <div className="lg:col-span-4 space-y-8">
-              <div className="bg-[#09141e]/60 backdrop-blur-3xl rounded-[2.5rem] p-10 border border-white/5 shadow-xl">
-                 <h3 className="font-black text-white mb-8 flex items-center gap-4 uppercase tracking-[0.3em] text-[10px] opacity-40"><Code2 className="text-indigo-400" size={20}/> Technical Skills</h3>
-                 <div className="flex flex-wrap gap-3">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10">
+           <div className="lg:col-span-4 space-y-6 sm:space-y-8">
+              <div className="bg-white dark:bg-[#09141e]/60 backdrop-blur-3xl rounded-[2.5rem] p-8 border border-slate-200/90 dark:border-white/5 shadow-sm dark:shadow-xl">
+                 <h3 className="font-black text-slate-900 dark:text-white mb-6 flex items-center gap-3 uppercase tracking-[0.2em] text-[10px] opacity-70"><Code2 className="text-indigo-600 dark:text-indigo-400" size={18}/> Technical Skills</h3>
+                 <div className="flex flex-wrap gap-2.5">
                     {profileData?.skills?.map((skill, i) => (
-                      <span key={i} className="px-4 py-2 bg-indigo-600/10 text-indigo-400 font-black text-[9px] rounded-xl border border-indigo-500/20 hover:border-indigo-500/50 hover:bg-indigo-600/20 transition-all uppercase tracking-widest">
+                      <span key={i} className="px-3.5 py-1.5 bg-indigo-50 dark:bg-indigo-600/10 text-indigo-600 dark:text-indigo-400 font-bold text-[9px] rounded-xl border border-indigo-200 dark:border-indigo-500/20 uppercase tracking-wider">
                         {skill}
                       </span>
                     ))}
                  </div>
               </div>
 
-              <div className="bg-[#09141e]/60 backdrop-blur-3xl rounded-[2.5rem] p-10 border border-white/5 shadow-xl">
-                 <h3 className="font-black text-white mb-8 flex items-center gap-4 uppercase tracking-[0.3em] text-[10px] opacity-40"><Trophy className="text-indigo-400" size={20} /> Achievements</h3>
-                 <div className="space-y-5">
+              <div className="bg-white dark:bg-[#09141e]/60 backdrop-blur-3xl rounded-[2.5rem] p-8 border border-slate-200/90 dark:border-white/5 shadow-sm dark:shadow-xl">
+                 <h3 className="font-black text-slate-900 dark:text-white mb-6 flex items-center gap-3 uppercase tracking-[0.2em] text-[10px] opacity-70"><Trophy className="text-indigo-600 dark:text-indigo-400" size={18} /> Achievements</h3>
+                 <div className="space-y-4">
                    {profileData?.achievements?.map((ach, i) => (
-                     <div key={i} className="flex gap-5 items-start group">
-                        <div className="w-2 h-2 rounded-full bg-indigo-500 mt-2 shrink-0 group-hover:shadow-[0_0_15px_#6366f1] transition-all"></div>
-                        <p className="text-[11px] text-slate-400 font-black uppercase tracking-widest group-hover:text-indigo-400 transition-colors leading-relaxed">{ach}</p>
+                     <div key={i} className="flex gap-4 items-start group">
+                        <div className="w-2 h-2 rounded-full bg-indigo-600 mt-1.5 shrink-0"></div>
+                        <p className="text-[11px] text-slate-700 dark:text-slate-400 font-medium uppercase tracking-wider leading-relaxed">{ach}</p>
                      </div>
                    ))}
                  </div>
               </div>
 
-              <div className="bg-[#09141e]/60 rounded-[2.5rem] p-10 border border-white/5 shadow-xl">
-                 <h3 className="font-black text-white mb-8 flex items-center gap-4 uppercase tracking-[0.3em] text-[10px] opacity-40"><Mail className="text-indigo-400" size={20}/>contact details</h3>
-                 <div className="space-y-5 text-[11px] font-black uppercase tracking-[0.2em]">
-                    <div className="flex items-center gap-5 text-slate-400 hover:text-indigo-400 transition-colors cursor-pointer leading-none"><Mail size={18}/> {profileData?.resumeEmail || profileData?.email}</div>
-                    <div className="flex items-center gap-5 text-slate-400 hover:text-indigo-400 transition-colors cursor-pointer leading-none"><Phone size={18}/> {profileData?.phone}</div>
+              <div className="bg-white dark:bg-[#09141e]/60 rounded-[2.5rem] p-8 border border-slate-200/90 dark:border-white/5 shadow-sm dark:shadow-xl">
+                 <h3 className="font-black text-slate-900 dark:text-white mb-6 flex items-center gap-3 uppercase tracking-[0.2em] text-[10px] opacity-70"><Mail className="text-indigo-600 dark:text-indigo-400" size={18}/> Contact Details</h3>
+                 <div className="space-y-4 text-[11px] font-bold uppercase tracking-wider">
+                    <div className="flex items-center gap-4 text-slate-600 dark:text-slate-400 hover:text-indigo-600 transition-colors cursor-pointer leading-none"><Mail size={16}/> {profileData?.resumeEmail || profileData?.email}</div>
+                    <div className="flex items-center gap-4 text-slate-600 dark:text-slate-400 hover:text-indigo-600 transition-colors cursor-pointer leading-none"><Phone size={16}/> {profileData?.phone}</div>
                  </div>
               </div>
            </div>
 
-           <div className="lg:col-span-8 space-y-8">
-              <div className="bg-[#09141e]/60 backdrop-blur-3xl rounded-[3.5rem] p-12 border border-white/5 shadow-2xl relative overflow-hidden">
-                 <h3 className="font-black text-white mb-12 flex items-center gap-4 uppercase tracking-[0.3em] text-[10px] opacity-40"><Briefcase className="text-indigo-400" size={20}/> Professional Protocol</h3>
-                 <div className="space-y-16 relative before:absolute before:left-[11px] before:top-2 before:h-[calc(100%-10px)] before:w-[1px] before:bg-indigo-500/10">
+           <div className="lg:col-span-8 space-y-6 sm:space-y-8">
+              <div className="bg-white dark:bg-[#09141e]/60 backdrop-blur-3xl rounded-[3rem] p-8 sm:p-12 border border-slate-200/90 dark:border-white/5 shadow-sm dark:shadow-2xl relative overflow-hidden">
+                 <h3 className="font-black text-slate-900 dark:text-white mb-10 flex items-center gap-3 uppercase tracking-[0.2em] text-[10px] opacity-70"><Briefcase className="text-indigo-600 dark:text-indigo-400" size={18}/> Experience History</h3>
+                 <div className="space-y-12 relative before:absolute before:left-[11px] before:top-2 before:h-[calc(100%-10px)] before:w-[1px] before:bg-indigo-500/20">
                     {profileData?.experience?.map((exp, i) => (
-                      <div key={i} className="relative pl-12 group">
-                         <div className="absolute left-0 top-1.5 w-[22px] h-[22px] bg-[#09141e] rounded-full border border-indigo-600 shadow-[0_0_15px_rgba(99,102,241,0.5)] z-10 flex items-center justify-center transition-all group-hover:scale-125">
-                            <div className="w-2 h-2 bg-indigo-400 rounded-full animate-pulse"></div>
+                      <div key={i} className="relative pl-10 group">
+                         <div className="absolute left-0 top-1.5 w-[22px] h-[22px] bg-white dark:bg-[#09141e] rounded-full border border-indigo-600 z-10 flex items-center justify-center transition-all group-hover:scale-110 shadow-sm">
+                            <div className="w-2 h-2 bg-indigo-600 rounded-full animate-pulse"></div>
                          </div>
-                         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-6">
+                         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-4">
                             <div>
-                               <h4 className="text-2xl font-black text-white tracking-tighter uppercase leading-none">{exp.role}</h4>
-                               <p className="text-indigo-400 font-black text-xs tracking-[0.2em] mt-2 uppercase">{exp.company}</p>
+                               <h4 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tighter uppercase leading-none">{exp.role}</h4>
+                               <p className="text-indigo-600 dark:text-indigo-400 font-bold text-xs tracking-wider mt-1.5 uppercase">{exp.company}</p>
                             </div>
-                            <span className="px-5 py-2 bg-indigo-600/10 rounded-xl text-[9px] font-black uppercase text-indigo-400 tracking-[0.3em] border border-indigo-500/10 h-fit mt-3 sm:mt-0 shadow-lg">{exp.duration}</span>
+                            <span className="px-4 py-1.5 bg-indigo-50 dark:bg-indigo-600/10 rounded-xl text-[9px] font-black uppercase text-indigo-600 dark:text-indigo-400 tracking-widest border border-indigo-100 dark:border-indigo-500/10 h-fit mt-2 sm:mt-0 shadow-sm">{exp.duration}</span>
                          </div>
-                         <p className="text-slate-400 leading-relaxed text-sm font-medium italic opacity-80 group-hover:opacity-100 transition-opacity">"{exp.desc}"</p>
+                         <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-sm font-medium italic opacity-90">"{exp.desc}"</p>
                       </div>
                     ))}
                  </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
                  {profileData?.projects?.map((proj, i) => (
-                    <div key={i} className="bg-[#09141e]/60 border border-white/5 p-10 rounded-[3rem] hover:border-indigo-500/40 transition-all duration-500 group relative overflow-hidden shadow-xl">
-                       <div className="absolute -right-4 -top-4 w-24 h-24 bg-indigo-500/5 rounded-full blur-2xl group-hover:bg-indigo-500/10 transition-all"></div>
-                       <div className="flex justify-between items-start mb-8">
-                          <div className="w-14 h-14 bg-indigo-600/10 rounded-2xl flex items-center justify-center text-indigo-400 font-black text-lg border border-indigo-500/10 group-hover:bg-indigo-600 group-hover:text-white transition-all shadow-xl">
+                    <div key={i} className="bg-white dark:bg-[#09141e]/60 border border-slate-200/90 dark:border-white/5 p-8 rounded-[2.5rem] hover:border-indigo-400 transition-all duration-300 group relative overflow-hidden shadow-sm hover:shadow-md dark:shadow-xl">
+                       <div className="flex justify-between items-start mb-6">
+                          <div className="w-12 h-12 bg-indigo-50 dark:bg-indigo-600/10 rounded-2xl flex items-center justify-center text-indigo-600 dark:text-indigo-400 font-black text-base border border-indigo-100 dark:border-indigo-500/10 group-hover:bg-indigo-600 group-hover:text-white transition-all shadow-sm">
                             {String(i + 1).padStart(2, '0')}
                           </div>
                           {proj.link && (
-                            <a href={proj.link} target="_blank" rel="noreferrer" className="p-3 bg-white/5 rounded-xl text-slate-500 hover:text-indigo-400 hover:bg-white/10 transition-all">
-                              <ExternalLink size={20}/>
+                            <a href={proj.link} target="_blank" rel="noreferrer" className="p-2.5 bg-slate-100 dark:bg-white/5 rounded-xl text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all">
+                              <ExternalLink size={18}/>
                             </a>
                           )}
                        </div>
-                       <h4 className="text-xl font-black text-white mb-3 uppercase tracking-tighter leading-none">{proj.title}</h4>
-                       <p className="text-[10px] text-indigo-500 font-black mb-6 uppercase tracking-[0.3em] leading-none">{proj.tech}</p>
-                       <p className="text-sm text-slate-500 leading-relaxed font-medium italic line-clamp-3 opacity-80 group-hover:opacity-100 transition-opacity">"{proj.desc}"</p>
+                       <h4 className="text-lg font-black text-slate-900 dark:text-white mb-2 uppercase tracking-tighter leading-none">{proj.title}</h4>
+                       <p className="text-[10px] text-indigo-600 dark:text-indigo-500 font-bold mb-4 uppercase tracking-wider leading-none">{proj.tech}</p>
+                       <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-medium italic line-clamp-3 opacity-90">"{proj.desc}"</p>
                     </div>
                  ))}
               </div>

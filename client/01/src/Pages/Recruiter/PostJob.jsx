@@ -11,22 +11,22 @@ import axios from 'axios';
 import { useAuth } from '../../Context/AuthContext';
 
 const InputField = ({ label, icon: Icon, type = "text", placeholder, name, options, value, onChange, disabled }) => (
-  <div className={`space-y-3 ${disabled ? 'opacity-40' : ''}`}>
-    <label className="text-[10px] font-black text-slate-500 uppercase ml-2 tracking-[0.3em] flex items-center gap-3 leading-none">
-      <Icon size={14} className="text-indigo-500" /> {label}
+  <div className={`space-y-2.5 ${disabled ? 'opacity-40' : ''}`}>
+    <label className="text-[10px] font-black text-slate-500 uppercase ml-2 tracking-[0.2em] flex items-center gap-2 leading-none">
+      <Icon size={14} className="text-indigo-600 dark:text-indigo-400" /> {label}
     </label>
     {options ? (
       <div className="relative group">
         <select 
           disabled={disabled}
-          className={`w-full bg-[#030712] border border-white/10 p-5 rounded-2xl text-white outline-none focus:border-indigo-500 transition-all font-bold appearance-none text-xs uppercase tracking-widest ${disabled ? 'cursor-not-allowed' : 'cursor-pointer shadow-inner'}`}
+          className={`w-full bg-slate-50 dark:bg-[#030712] border border-slate-200 dark:border-white/10 p-4 rounded-2xl text-slate-900 dark:text-white outline-none focus:border-indigo-500 transition-all font-bold appearance-none text-xs uppercase tracking-wider ${disabled ? 'cursor-not-allowed' : 'cursor-pointer shadow-sm'}`}
           value={value} 
           onChange={(e) => onChange(e, name)}
         >
-          {options.map(opt => <option key={opt} value={opt} className="bg-[#09141e]">{opt}</option>)}
+          {options.map(opt => <option key={opt} value={opt} className="bg-white dark:bg-[#09141e] text-slate-900 dark:text-white">{opt}</option>)}
         </select>
-        <div className="absolute inset-y-0 right-5 flex items-center pointer-events-none opacity-40 group-hover:opacity-100 transition-opacity">
-          <ChevronRight size={16} className="rotate-90 text-indigo-400" />
+        <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none opacity-40 group-hover:opacity-100 transition-opacity">
+          <ChevronRight size={16} className="rotate-90 text-indigo-600 dark:text-indigo-400" />
         </div>
       </div>
     ) : (
@@ -34,7 +34,7 @@ const InputField = ({ label, icon: Icon, type = "text", placeholder, name, optio
         disabled={disabled}
         type={type}
         required={name !== 'salary' && name !== 'website'}
-        className={`w-full bg-[#030712] border border-white/10 p-5 rounded-2xl text-white outline-none focus:border-indigo-500 transition-all font-bold placeholder:text-slate-700 text-sm shadow-inner ${disabled ? 'cursor-not-allowed' : ''}`}
+        className={`w-full bg-slate-50 dark:bg-[#030712] border border-slate-200 dark:border-white/10 p-4 rounded-2xl text-slate-900 dark:text-white outline-none focus:border-indigo-500 transition-all font-semibold placeholder:text-slate-400 dark:placeholder:text-slate-700 text-sm shadow-sm ${disabled ? 'cursor-not-allowed' : ''}`}
         placeholder={placeholder}
         value={value || ""} 
         onChange={(e) => onChange(e, name)}
@@ -118,55 +118,47 @@ const PostJob = () => {
   );
 
   return (
-    <div className="min-h-screen bg-[#09141e] text-slate-200 font-sans selection:bg-indigo-500/30 overflow-x-hidden relative">
+    <div className="min-h-screen bg-slate-50 dark:bg-[#09141e] text-slate-800 dark:text-slate-200 font-sans selection:bg-indigo-500/20 overflow-x-hidden relative transition-colors duration-200">
       
-      {/* --- GRID BACKGROUND ENGINE --- */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-        <div className="absolute inset-0" style={{ 
-          backgroundSize: '60px 60px',
-        }} />
-      </div>
-
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 py-12 md:py-16">
         
         {/* --- EXIT / RETURN BUTTON --- */}
-        <Link to="/RecruiterDashboard" className="absolute top-8 right-8 p-4 bg-white/5 border border-white/10 text-slate-400 rounded-2xl hover:text-white hover:bg-white/10 transition-all shadow-xl z-[100] active:scale-90 backdrop-blur-xl">
-          <X size={24} />
+        <Link to="/RecruiterDashboard" aria-label="Return to Dashboard" className="absolute top-8 right-8 p-3.5 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-500 dark:text-slate-400 rounded-2xl hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-all shadow-md z-[100] active:scale-95 backdrop-blur-xl">
+          <X size={22} />
         </Link>
 
-        <header className="mb-20">
-          <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="space-y-6">
-            
-            <h1 className="text-3xl md:text-5xl font-black text-white tracking-tighter uppercase leading-[0.85]">
+        <header className="mb-12">
+          <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="space-y-2">
+            <h1 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tighter uppercase leading-[0.85]">
               {isEditing ? 'Recalibrate' : 'Deploy'} 
-              <span className="text-indigo-500 italic">Position</span>
+              <span className="text-indigo-600 dark:text-indigo-400 italic"> Position</span>
             </h1>
           </motion.div>
         </header>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
-          <div className="lg:col-span-7 space-y-12">
-            <form onSubmit={handleSubmit} className="bg-[#030712]/60 border border-white/10 p-10 md:p-14 rounded-[4rem] backdrop-blur-3xl space-y-12 shadow-2xl">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          <div className="lg:col-span-7 space-y-10">
+            <form onSubmit={handleSubmit} className="bg-white dark:bg-[#030712]/60 border border-slate-200/90 dark:border-white/10 p-8 sm:p-12 md:p-14 rounded-[3.5rem] backdrop-blur-3xl space-y-10 shadow-sm dark:shadow-2xl">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <InputField label="Target Position" icon={Target} name="title" placeholder="e.g. Lead Software Architect" value={formData.title} onChange={handleChange} />
                 <InputField label="Company Name" icon={Building2} name="company" placeholder="Entity Name" value={formData.company} onChange={handleChange} />
                 <InputField label="Phone" icon={Phone} name="phone" placeholder="+1 (555) 000-0000" value={formData.phone} onChange={handleChange} />
-                <InputField label="Combany Website" icon={Globe} name="website" placeholder="https://company.io" value={formData.website} onChange={handleChange} />
+                <InputField label="Company Website" icon={Globe} name="website" placeholder="https://company.io" value={formData.website} onChange={handleChange} />
                 <InputField label="Job Type" icon={Briefcase} name="type" options={['Full-time', 'Internship', 'Contract', 'Part-time']} value={formData.type} onChange={handleChange} />
-                <InputField label="Work " icon={Zap} name="mode" options={['Remote', 'On-site', 'Hybrid']} value={formData.mode} onChange={handleChange} />
+                <InputField label="Work Mode" icon={Zap} name="mode" options={['Remote', 'On-site', 'Hybrid']} value={formData.mode} onChange={handleChange} />
                 <InputField label="Salary" icon={DollarSign} name="salary" placeholder="e.g. ₹12L - ₹18L" value={formData.salary} onChange={handleChange} />
                 <InputField label="Country and City" icon={MapPin} name="address" placeholder="City, Country" value={formData.address} onChange={handleChange} />
                 <InputField label="Active Duration" icon={Clock} name="visibilityDuration" options={['7 Days', '15 Days', '30 Days', 'Forever']} value={formData.visibilityDuration} onChange={handleChange} disabled={isEditing} />
-                <InputField label="CV's requirement" icon={FileStack} name="cvLimit" options={['50 CVs', '100 CVs', '500 CVs', 'No Limit']} value={formData.cvLimit} onChange={handleChange} disabled={isEditing} />
+                <InputField label="CV Requirement" icon={FileStack} name="cvLimit" options={['50 CVs', '100 CVs', '500 CVs', 'No Limit']} value={formData.cvLimit} onChange={handleChange} disabled={isEditing} />
               </div>
 
-              <div className="space-y-4">
-                <label className="text-[10px] font-black text-slate-500 uppercase ml-4 tracking-[0.4em] flex items-center gap-3 leading-none">
-                  <AlignLeft size={14} className="text-indigo-500" /> Job Description
+              <div className="space-y-3">
+                <label className="text-[10px] font-black text-slate-500 uppercase ml-2 tracking-[0.2em] flex items-center gap-2 leading-none">
+                  <AlignLeft size={14} className="text-indigo-600 dark:text-indigo-400" /> Job Description
                 </label>
                 <textarea 
-                  required rows="8"
-                  className="w-full bg-[#030712] border border-white/10 p-8 rounded-[3rem] text-slate-300 outline-none focus:border-indigo-500 transition-all font-medium leading-relaxed placeholder:text-slate-800 text-base shadow-inner no-scrollbar"
+                  required rows="7"
+                  className="w-full bg-slate-50 dark:bg-[#030712] border border-slate-200 dark:border-white/10 p-6 rounded-[2.5rem] text-slate-800 dark:text-slate-300 outline-none focus:border-indigo-500 transition-all font-medium leading-relaxed placeholder:text-slate-400 dark:placeholder:text-slate-700 text-sm shadow-sm"
                   placeholder="Detail core operational objectives and technical requirements..."
                   value={formData.description}
                   onChange={(e) => handleChange(e, 'description')}
@@ -175,64 +167,60 @@ const PostJob = () => {
 
               <button 
                 disabled={loading}
-                className="w-full py-8 rounded-[2.5rem] font-black uppercase tracking-[0.5em] text-xs transition-all duration-700 shadow-2xl flex items-center justify-center gap-4 bg-indigo-600 text-white hover:bg-white hover:text-black active:scale-95 disabled:opacity-20 shadow-indigo-500/20"
+                className="w-full py-6 rounded-[2rem] font-black uppercase tracking-[0.4em] text-xs transition-all duration-300 shadow-md flex items-center justify-center gap-3 bg-indigo-600 text-white hover:bg-indigo-500 active:scale-95 disabled:opacity-30"
               >
-                {loading ? <Loader2 className="animate-spin" size={24} /> : <><Sparkles size={20}/> {isEditing ? 'Finalize Recalibration' : 'Execute Broadcast'}</>}
+                {loading ? <Loader2 className="animate-spin" size={20} /> : <><Sparkles size={18}/> {isEditing ? 'Finalize Recalibration' : 'Execute Broadcast'}</>}
               </button>
             </form>
           </div>
 
           {/* --- PREVIEW PANEL --- */}
           <div className="lg:col-span-5 hidden lg:block">
-            <div className="sticky top-12 space-y-8">
-              <p className="text-[10px] font-black text-slate-600 uppercase tracking-[0.6em] ml-6 italic">Grid Node Preview</p>
+            <div className="sticky top-10 space-y-6">
+              <p className="text-[10px] font-black text-slate-400 dark:text-slate-600 uppercase tracking-[0.4em] ml-4 italic">Live Job Preview</p>
               
               <div className="relative group">
-                <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-[4rem] blur opacity-10 group-hover:opacity-30 transition duration-1000"></div>
-                
-                <div className="relative bg-[#030712]/80 border border-white/10 p-12 rounded-[4rem] shadow-2xl backdrop-blur-3xl overflow-hidden">
-                  <div className="absolute inset-0 opacity-5 pointer-events-none" style={{ backgroundImage: `radial-gradient(circle at 2px 2px, #6366f1 1px, transparent 0)`, backgroundSize: '32px 32px' }}></div>
-                  
-                  <div className="flex items-center gap-8 mb-12 relative z-10">
-                    <div className="w-24 h-24 bg-[#09141e] border border-white/10 rounded-3xl flex items-center justify-center text-indigo-400 font-black text-5xl uppercase shadow-2xl group-hover:border-indigo-500/40 transition-all duration-500">
+                <div className="relative bg-white dark:bg-[#030712]/80 border border-slate-200/90 dark:border-white/10 p-10 rounded-[3.5rem] shadow-sm hover:shadow-md dark:shadow-2xl backdrop-blur-3xl overflow-hidden transition-all">
+                  <div className="flex items-center gap-6 mb-10 relative z-10">
+                    <div className="w-20 h-20 bg-indigo-50 dark:bg-[#09141e] border border-indigo-100 dark:border-white/10 rounded-2xl flex items-center justify-center text-indigo-600 dark:text-indigo-400 font-black text-4xl uppercase shadow-sm">
                       {formData.company ? formData.company.charAt(0) : "?"}
                     </div>
                     <div>
-                      <p className="text-indigo-400 text-[10px] font-black uppercase tracking-[0.4em] mb-2 flex items-center gap-2">
-                        <ShieldCheck size={12} />Company Name
+                      <p className="text-indigo-600 dark:text-indigo-400 text-[10px] font-black uppercase tracking-[0.3em] mb-1.5 flex items-center gap-1.5">
+                        <ShieldCheck size={12} /> Company
                       </p>
-                      <h4 className="text-3xl font-black text-white uppercase tracking-tighter leading-none group-hover:text-indigo-400 transition-colors">
+                      <h4 className="text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tighter leading-none">
                         {formData.company || "Pending..."}
                       </h4>
                     </div>
                   </div>
 
-                  <div className="mb-12 relative z-10">
-                    <h2 className="text-5xl font-black text-white uppercase tracking-tighter leading-[0.85] mb-6 ">
+                  <div className="mb-10 relative z-10">
+                    <h2 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white uppercase tracking-tighter leading-tight mb-4">
                       {formData.title || "Position Title"}
                     </h2>
-                    <div className="flex flex-wrap gap-3">
-                       <span className="px-4 py-2 bg-indigo-500/10 border border-indigo-500/20 rounded-xl text-[9px] font-black text-indigo-400 uppercase tracking-widest">{formData.type}</span>
-                       <span className="px-4 py-2 bg-purple-500/10 border border-purple-500/20 rounded-xl text-[9px] font-black text-purple-400 uppercase tracking-widest">{formData.mode}</span>
+                    <div className="flex flex-wrap gap-2.5">
+                       <span className="px-3.5 py-1.5 bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-100 dark:border-indigo-500/20 rounded-xl text-[9px] font-black text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">{formData.type}</span>
+                       <span className="px-3.5 py-1.5 bg-purple-50 dark:bg-purple-500/10 border border-purple-100 dark:border-purple-500/20 rounded-xl text-[9px] font-black text-purple-600 dark:text-purple-400 uppercase tracking-wider">{formData.mode}</span>
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-y-10 gap-x-6 mb-12 relative z-10 border-t border-white/5 pt-12">
+                  <div className="grid grid-cols-2 gap-y-8 gap-x-6 mb-8 relative z-10 border-t border-slate-100 dark:border-white/5 pt-8">
                     <div className="space-y-1">
-                      <p className="text-slate-600 text-[9px] font-black uppercase tracking-widest">Salary</p>
-                      <p className="text-white font-bold text-sm tracking-tight">{formData.salary || "TBD"}</p>
+                      <p className="text-slate-400 dark:text-slate-600 text-[9px] font-black uppercase tracking-wider">Salary</p>
+                      <p className="text-slate-900 dark:text-white font-bold text-sm tracking-tight">{formData.salary || "TBD"}</p>
                     </div>
                     <div className="space-y-1">
-                      <p className="text-slate-600 text-[9px] font-black uppercase tracking-widest">adress</p>
-                      <p className="text-white font-bold text-sm tracking-tight truncate">{formData.address || "city"}</p>
+                      <p className="text-slate-400 dark:text-slate-600 text-[9px] font-black uppercase tracking-wider">Address</p>
+                      <p className="text-slate-900 dark:text-white font-bold text-sm tracking-tight truncate">{formData.address || "City"}</p>
                     </div>
                     <div className="space-y-1">
-                      <p className="text-slate-600 text-[9px] font-black uppercase tracking-widest">CV's requirement</p>
-                      <p className="text-white font-bold text-sm tracking-tight">{formData.cvLimit}</p>
+                      <p className="text-slate-400 dark:text-slate-600 text-[9px] font-black uppercase tracking-wider">CV Requirement</p>
+                      <p className="text-slate-900 dark:text-white font-bold text-sm tracking-tight">{formData.cvLimit}</p>
                     </div>
                     <div className="space-y-1">
-                      <p className="text-slate-600 text-[9px] font-black uppercase tracking-widest">active duration</p>
-                      <p className="text-white font-bold text-sm tracking-tight">{formData.visibilityDuration}</p>
+                      <p className="text-slate-400 dark:text-slate-600 text-[9px] font-black uppercase tracking-wider">Active Duration</p>
+                      <p className="text-slate-900 dark:text-white font-bold text-sm tracking-tight">{formData.visibilityDuration}</p>
                     </div>
                   </div>
 

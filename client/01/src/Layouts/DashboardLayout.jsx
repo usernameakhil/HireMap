@@ -19,7 +19,7 @@ const DashboardLayout = () => {
     /* min-h-screen ensures the dark background spans the entire height of the page.
        The main wrapper must be relative to act as the scroll container for the sticky Navbar.
     */
-    <div className="flex min-h-screen w-full bg-[#0f172a] font-sans selection:bg-indigo-500/30">
+    <div className="flex min-h-screen w-full bg-slate-50 dark:bg-[#0b0f19] text-slate-900 dark:text-slate-100 font-sans selection:bg-indigo-500/20 transition-colors duration-200">
       
       {/* 1. Sidebar */}
       <Sidebar 
@@ -30,7 +30,7 @@ const DashboardLayout = () => {
 
       {/* 2. Main Content Area */}
       {/* min-w-0 prevents flex items from overflowing and creating white gaps */}
-      <div className="flex-1 flex flex-col min-w-0 bg-[#0f172a]">
+      <div className="flex-1 flex flex-col min-w-0 bg-slate-50 dark:bg-[#0b0f19] transition-colors duration-200">
         
         {/* 3. Top Navbar 
             Ensure the Navbar component itself has 'sticky top-0 z-40' classes 
@@ -44,7 +44,7 @@ const DashboardLayout = () => {
         {/* Using 'flex-1' ensures this area fills all available vertical space.
             We keep the background color here as a safety layer.
         */}
-        <main className="flex-1 relative z-0 bg-[#0f172a] w-full">
+        <main className="flex-1 relative z-0 bg-slate-50 dark:bg-[#0b0f19] w-full transition-colors duration-200">
           <Outlet /> 
         </main>
       </div>

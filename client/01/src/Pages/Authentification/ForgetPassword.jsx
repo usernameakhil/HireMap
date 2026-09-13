@@ -92,53 +92,53 @@ const ForgtPassword = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0f1a] text-slate-200">
+    <div className="min-h-screen bg-slate-50 dark:bg-[#0a0f1a] text-slate-800 dark:text-slate-200 transition-colors duration-200">
       <Navbar />
-      <div className="flex items-center justify-center py-24 px-4 relative">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-blue-600/5 rounded-full blur-[120px] pointer-events-none" />
-
+      <div className="flex items-center justify-center py-20 px-4 relative">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white/5 border border-white/10 p-10 rounded-[2.5rem] backdrop-blur-2xl shadow-2xl w-full max-w-md relative z-10"
+          className="bg-white dark:bg-white/5 border border-slate-200/90 dark:border-white/10 p-8 sm:p-10 rounded-[2.5rem] backdrop-blur-2xl shadow-sm dark:shadow-2xl w-full max-w-md relative z-10"
         >
           <header className="text-center mb-8">
-            <div className="w-16 h-16 bg-blue-600/10 border border-blue-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4 text-blue-500">
-              {step === 1 ? <Key size={30} /> : <ShieldCheck size={30} />}
+            <div className="w-16 h-16 bg-indigo-50 dark:bg-indigo-600/10 border border-indigo-100 dark:border-indigo-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4 text-indigo-600 dark:text-indigo-400 shadow-sm">
+              {step === 1 ? <Key size={28} /> : <ShieldCheck size={28} />}
             </div>
-            <h2 className="text-3xl font-black text-white uppercase tracking-tighter">
-              {step === 1 ? 'Recover Access' : 'Set New Key'}
+            <h2 className="text-3xl font-black text-slate-900 dark:text-white uppercase tracking-tighter">
+              {step === 1 ? 'Recover Access' : 'Set New Password'}
             </h2>
-            <p className="text-slate-500 text-[10px] font-black uppercase tracking-widest mt-2 italic">
-              Initiating {role} Node Recovery
+            <p className="text-slate-400 text-xs font-bold uppercase tracking-wider mt-1.5">
+              Initiating {role} Recovery
             </p>
           </header>
 
           {/* Role Toggle: Crucial for determining which DB to hit */}
           {step === 1 && (
-            <div className="flex p-1 bg-white/5 border border-white/10 rounded-2xl mb-8">
+            <div className="flex p-1 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl mb-8">
               <button 
+                type="button"
                 onClick={() => setRole('student')}
-                className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-xl text-[9px] font-black uppercase tracking-widest transition-all duration-300 ${role === 'student' ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/20' : 'text-slate-500 hover:text-white'}`}
+                className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-wider transition-all duration-300 ${role === 'student' ? 'bg-indigo-600 text-white shadow-sm' : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'}`}
               >
-                <User size={12} /> Student
+                <User size={13} /> Student
               </button>
               <button 
+                type="button"
                 onClick={() => setRole('recruiter')}
-                className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-xl text-[9px] font-black uppercase tracking-widest transition-all duration-300 ${role === 'recruiter' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/20' : 'text-slate-500 hover:text-white'}`}
+                className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-wider transition-all duration-300 ${role === 'recruiter' ? 'bg-indigo-600 text-white shadow-sm' : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'}`}
               >
-                <Building2 size={12} /> Recruiter
+                <Building2 size={13} /> Recruiter
               </button>
             </div>
           )}
 
           {message && (
-            <div className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 p-4 rounded-xl mb-6 text-[10px] font-black uppercase tracking-widest flex items-center gap-2">
+            <div className="bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 text-emerald-600 dark:text-emerald-400 p-4 rounded-xl mb-6 text-[10px] font-black uppercase tracking-wider flex items-center gap-2">
               <ShieldCheck size={16} /> {message}
             </div>
           )}
           {error && (
-            <div className="bg-rose-500/10 border border-rose-500/20 text-rose-500 p-4 rounded-xl mb-6 text-[10px] font-black uppercase tracking-widest flex items-center gap-2">
+            <div className="bg-rose-50 dark:bg-rose-500/10 border border-rose-200 dark:border-rose-500/20 text-rose-600 dark:text-rose-400 p-4 rounded-xl mb-6 text-[10px] font-black uppercase tracking-wider flex items-center gap-2">
               <Mail size={16} /> {error}
             </div>
           )}
@@ -154,14 +154,14 @@ const ForgtPassword = () => {
                 className="space-y-6"
               >
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black text-slate-500 uppercase ml-2 tracking-widest">
-                    {role === 'student' ? 'Primary Student Email' : 'Corporate Recruiter Email'}
+                  <label className="text-[10px] font-bold text-slate-500 uppercase ml-2 tracking-wider">
+                    {role === 'student' ? 'Student Email' : 'Recruiter Email'}
                   </label>
                   <div className="relative group">
-                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-blue-500 transition-colors" size={18} />
+                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-indigo-600 transition-colors" size={17} />
                     <input 
                       type="email" required 
-                      className="w-full bg-white/5 border border-white/10 p-4 pl-12 rounded-2xl text-white outline-none focus:border-blue-500 transition-all font-bold placeholder:text-slate-700"
+                      className="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 p-4 pl-12 rounded-2xl text-slate-900 dark:text-white outline-none focus:border-indigo-600 transition-all font-semibold placeholder:text-slate-400 dark:placeholder:text-slate-600 text-sm shadow-sm"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder={role === 'student' ? 'student@gmail.com' : 'hr@company.com'}
@@ -170,9 +170,9 @@ const ForgtPassword = () => {
                 </div>
                 <button 
                   disabled={loading}
-                  className="w-full bg-blue-600 hover:bg-blue-500 text-white py-5 rounded-2xl font-black text-xs uppercase tracking-[0.3em] transition-all flex items-center justify-center gap-2 active:scale-[0.98] disabled:opacity-50"
+                  className="w-full bg-indigo-600 hover:bg-indigo-500 text-white py-4 rounded-2xl font-black text-xs uppercase tracking-[0.3em] transition-all flex items-center justify-center gap-2 active:scale-[0.98] disabled:opacity-50 shadow-md"
                 >
-                  {loading ? <Loader2 className="animate-spin" /> : <>Request OTP <ArrowRight size={16}/></>}
+                  {loading ? <Loader2 className="animate-spin" size={18} /> : <>Request OTP <ArrowRight size={16}/></>}
                 </button>
               </motion.form>
             ) : (
@@ -185,10 +185,10 @@ const ForgtPassword = () => {
                 className="space-y-6"
               >
                  <div className="space-y-2">
-                  <label className="text-[10px] font-black text-slate-500 uppercase ml-2 tracking-widest">Verification Dossier (OTP)</label>
+                  <label className="text-[10px] font-bold text-slate-500 uppercase ml-2 tracking-wider">Verification OTP</label>
                   <input 
                     type="text" required 
-                    className="w-full bg-white/5 border border-white/10 p-4 rounded-2xl text-white outline-none focus:border-blue-500 text-center tracking-[0.5em] font-black text-xl placeholder:text-slate-800"
+                    className="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 p-4 rounded-2xl text-slate-900 dark:text-white outline-none focus:border-indigo-600 text-center tracking-[0.4em] font-black text-xl placeholder:text-slate-400 dark:placeholder:text-slate-700 shadow-sm"
                     value={otp}
                     maxLength={6}
                     onChange={(e) => setOtp(e.target.value)}
@@ -196,12 +196,12 @@ const ForgtPassword = () => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black text-slate-500 uppercase ml-2 tracking-widest">New Neural Access Key</label>
+                  <label className="text-[10px] font-bold text-slate-500 uppercase ml-2 tracking-wider">New Password</label>
                   <div className="relative group">
-                    <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-emerald-500 transition-colors" size={18} />
+                    <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-indigo-600 transition-colors" size={17} />
                     <input 
                       type="password" required 
-                      className="w-full bg-white/5 border border-white/10 p-4 pl-12 rounded-2xl text-white outline-none focus:border-emerald-500 transition-all font-bold placeholder:text-slate-700"
+                      className="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 p-4 pl-12 rounded-2xl text-slate-900 dark:text-white outline-none focus:border-indigo-600 transition-all font-semibold placeholder:text-slate-400 dark:placeholder:text-slate-600 text-sm shadow-sm"
                       value={newPassword}
                       onChange={(e) => setNewPassword(e.target.value)}
                       placeholder="••••••••"
@@ -210,9 +210,9 @@ const ForgtPassword = () => {
                 </div>
                 <button 
                   disabled={loading}
-                  className="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-5 rounded-2xl font-black text-xs uppercase tracking-[0.3em] transition-all active:scale-[0.98] disabled:opacity-50"
+                  className="w-full bg-indigo-600 hover:bg-indigo-500 text-white py-4 rounded-2xl font-black text-xs uppercase tracking-[0.3em] transition-all active:scale-[0.98] disabled:opacity-50 shadow-md"
                 >
-                  {loading ? <Loader2 className="animate-spin" /> : 'Re-calibrate Key'}
+                  {loading ? <Loader2 className="animate-spin" size={18} /> : 'Update Password'}
                 </button>
               </motion.form>
             )}
