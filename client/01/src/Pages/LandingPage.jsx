@@ -12,14 +12,16 @@ import {
 } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import ThemeToggle from '../Components/ThemeToggle';
+import { useTheme } from '../Context/ThemeContext';
 
 const LandingPage = () => {
   const scrollRef = useRef(null);
   const { scrollYProgress } = useScroll();
   const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
+  const { isDark } = useTheme();
 
   // Assets
-  const HIREMAP_LOGO = "/hiremap.jpg";
+  const HIREMAP_LOGO = isDark ? "/hiremap.jpg" : "/hiremap-light.jpg";
 
   const scroll = (direction) => {
     if (scrollRef.current) {

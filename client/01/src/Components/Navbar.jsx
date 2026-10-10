@@ -1,12 +1,14 @@
 // src/Components/Navbar.jsx
 import { Bell, Menu, Zap, Brain } from 'lucide-react';
 import { useAuth } from '../Context/AuthContext';
+import { useTheme } from '../Context/ThemeContext';
 import ThemeToggle from './ThemeToggle';
 
 const Navbar = ({ toggleSidebar }) => {
   const { user } = useAuth();
+  const { isDark } = useTheme();
   
-  const HIREMAP_LOGO = "/hiremap.jpg"; 
+  const HIREMAP_LOGO = isDark ? "/hiremap.jpg" : "/hiremap-light.jpg"; 
 
   return (
     <header className="sticky top-0 z-[100] bg-white/85 dark:bg-[#09141e]/90 backdrop-blur-2xl border-b border-slate-200/80 dark:border-white/5 h-20 px-6 md:px-10 flex items-center justify-between transition-colors duration-200 shadow-sm dark:shadow-none">

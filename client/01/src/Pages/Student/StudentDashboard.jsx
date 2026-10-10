@@ -7,15 +7,17 @@ import {
 } from 'lucide-react'; 
 import { motion } from 'framer-motion';
 import { useAuth } from '../../Context/AuthContext';
+import { useTheme } from '../../Context/ThemeContext';
 
 const StudentDashboard = () => {
   const { user } = useAuth(); 
+  const { isDark } = useTheme();
   const [stats, setStats] = useState({ applied: 0, shortlisted: 0 });
   const [loading, setLoading] = useState(true);
   const API_URL = import.meta.env.VITE_API_URL;
 
   // Your custom high-end logo asset
-  const HIREMAP_LOGO = "/hiremap.jpg"; 
+  const HIREMAP_LOGO = isDark ? "/hiremap.jpg" : "/hiremap-light.jpg"; 
 
   useEffect(() => {
     const fetchStats = async () => {

@@ -8,16 +8,18 @@ import {
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../Context/AuthContext';
+import { useTheme } from '../../Context/ThemeContext';
 import axios from 'axios';
 
 const RecruiterDashboard = () => {
   const { user } = useAuth();
+  const { isDark } = useTheme();
   const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
   const [recruiterName, setRecruiterName] = useState(""); 
   const [loading, setLoading] = useState(true);
   const API_URL = import.meta.env.VITE_API_URL;
-  const HIREMAP_LOGO = "/hiremap.jpg"; 
+  const HIREMAP_LOGO = isDark ? "/hiremap.jpg" : "/hiremap-light.jpg"; 
 
   useEffect(() => {
     const fetchDashboardData = async () => {
